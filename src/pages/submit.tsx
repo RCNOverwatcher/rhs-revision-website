@@ -1,26 +1,37 @@
 import Head from "next/head";
 import { db } from "~/firebaseConfig";
 import { collection, addDoc } from "firebase/firestore";
-import { useState } from "react";
-import { useUser } from "@clerk/nextjs";
+import { useEffect, useState } from "react";
+import { useAuth, useUser } from "@clerk/nextjs";
+import { getAuth, signInWithCustomToken } from "firebase/auth";
 
-export default function Home() {
+export default function Submit() {
+  const { getToken } = useAuth();
+
+  useEffect(() => {
+    const signInWithClerk = async () => {
+      const auth = getAuth();
+
+      try {
+        const token = await getToken({ template: "integration_firebase" });
+        if (!token) {
+          return;
+        }
+        const userCredentials = await signInWithCustomToken(auth, token);
+        console.log("User signed in successfully:", userCredentials.user);
+      } catch (error) {
+        console.log("An error occurred:", error);
+      }
+    };
+
+    signInWithClerk().catch((error) => {
+      console.log("An error occurred:", error);
+    });
+  });
+
   const [materialTitle, setMaterialTitle] = useState("");
   const [materialURL, setMaterialURL] = useState("");
-
   const { user } = useUser();
-  const isTeacher =
-    user?.primaryEmailAddress?.emailAddress &&
-    user.primaryEmailAddress.emailAddress.endsWith("@richardhale.co.uk");
-
-  if (!isTeacher) {
-    console.log("User is not authorized to submit data.");
-    return (
-      <div className="min-h-screen bg-gray-100">
-        <h1>Unauthorised</h1>
-      </div>
-    );
-  }
   const saveMaterial = async () => {
     try {
       const docRef = await addDoc(collection(db, "materials"), {
@@ -37,6 +48,22 @@ export default function Home() {
     return Promise.resolve();
   };
   const handleClick = () => {
+    const isTeacher =
+      user?.primaryEmailAddress?.emailAddress &&
+      user.primaryEmailAddress.emailAddress.endsWith("@richardhale.co.uk");
+
+    if (!isTeacher) {
+      console.log(user?.primaryEmailAddress?.emailAddress);
+      console.log("User is not authorized to submit data.");
+      return (
+        <div className="min-h-screen bg-gray-100">
+          <h1 className={"text-5xl text-neutral-600"}>
+            Unauthorised. You are not a teacher.
+          </h1>
+        </div>
+      );
+    }
+
     saveMaterial().catch((error) => {
       console.error("Error saving material:", error);
     });

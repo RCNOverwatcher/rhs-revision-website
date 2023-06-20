@@ -27,15 +27,13 @@ export default function Home() {
 
       try {
         const token = await getToken({ template: "integration_firebase" });
-
-        if (token !== null) {
-          const userCredentials = await signInWithCustomToken(auth, token);
-          console.log("user ::", userCredentials.user);
-        } else {
-          console.log("Token is null. Unable to sign in.");
+        if (!token) {
+          return;
         }
+        const userCredentials = await signInWithCustomToken(auth, token);
+        console.log("User signed in successfully:", userCredentials.user);
       } catch (error) {
-        console.log("An error occurred during sign-in:", error);
+        console.log("An error occurred:", error);
       }
     };
 

@@ -6,6 +6,7 @@ import { useAuth } from "@clerk/nextjs";
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithCustomToken } from "firebase/auth";
 import { firebaseConfig } from "~/firebaseConfig";
+import Link from "next/link";
 
 initializeApp(firebaseConfig);
 
@@ -66,7 +67,9 @@ export default function Home() {
           {materialArray.map((material) => (
             <div key={material.id} className="bg-white p-4 shadow">
               <h3 className="mb-2 text-lg font-semibold">{material.name}</h3>
-              <p className="text-gray-600">{material.url}</p>
+              <Link className="text-gray-600" href={material.url}>
+                {material.url}
+              </Link>
             </div>
           ))}
         </div>

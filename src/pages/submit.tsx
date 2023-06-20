@@ -31,8 +31,14 @@ export default function Home() {
     } catch (error) {
       console.error("Error saving material:", error);
     }
-  };
 
+    return Promise.resolve();
+  };
+  const handleClick = () => {
+    saveMaterial().catch((error) => {
+      console.error("Error saving material:", error);
+    });
+  };
   return (
     <div className="min-h-screen bg-gray-100">
       <Head>
@@ -57,7 +63,7 @@ export default function Home() {
           />
           <button
             className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:outline-none"
-            onClick={saveMaterial}
+            onClick={handleClick}
           >
             Click me to save
           </button>

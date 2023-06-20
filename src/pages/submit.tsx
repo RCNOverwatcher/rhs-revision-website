@@ -4,6 +4,7 @@ import { collection, addDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useAuth, useUser } from "@clerk/nextjs";
 import { getAuth, signInWithCustomToken } from "firebase/auth";
+import { z } from "zod";
 
 export default function Submit() {
   const { getToken } = useAuth();
@@ -29,14 +30,18 @@ export default function Submit() {
     });
   });
 
+  const urlSchema = z.string().url();
+
   const [materialTitle, setMaterialTitle] = useState("");
   const [materialURL, setMaterialURL] = useState("");
+  const [unauthorized, setUnauthorized] = useState(false);
+
   const { user } = useUser();
   const saveMaterial = async () => {
     try {
       const docRef = await addDoc(collection(db, "materials"), {
         name: materialTitle,
-        url: materialURL,
+        url: urlSchema.parse(materialURL),
       });
       setMaterialTitle("");
       setMaterialURL("");
@@ -49,25 +54,21 @@ export default function Submit() {
   };
   const handleClick = () => {
     const isTeacher =
-      user?.primaryEmailAddress?.emailAddress &&
-      user.primaryEmailAddress.emailAddress.endsWith("@richardhale.co.uk");
+        user?.primaryEmailAddress?.emailAddress &&
+        user.primaryEmailAddress.emailAddress.endsWith("@richardhale.co.uk");
 
     if (!isTeacher) {
       console.log(user?.primaryEmailAddress?.emailAddress);
       console.log("User is not authorized to submit data.");
-      return (
-        <div className="min-h-screen bg-gray-100">
-          <h1 className={"text-5xl text-neutral-600"}>
-            Unauthorised. You are not a teacher.
-          </h1>
-        </div>
-      );
+      setUnauthorized(true);
+      return;
     }
 
     saveMaterial().catch((error) => {
       console.error("Error saving material:", error);
     });
   };
+
   return (
     <div className="min-h-screen bg-gray-100">
       <Head>
@@ -78,29 +79,38 @@ export default function Submit() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <main className="container mx-auto py-8">
-        <div className="mx-auto max-w-md bg-white p-8 shadow">
-          <input
-            className="mb-4 w-full rounded border border-gray-300 px-3 py-2 focus:outline-none"
-            placeholder="Enter the Title.."
-            value={materialTitle}
-            onChange={(e) => setMaterialTitle(e.target.value)}
-          />
-          <input
-            className="mb-4 w-full rounded border border-gray-300 px-3 py-2 focus:outline-none"
-            placeholder="Enter the URL.."
-            value={materialURL}
-            onChange={(e) => setMaterialURL(e.target.value)}
-          />
-          <button
-            className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:outline-none"
-            onClick={handleClick}
-          >
-            Click me to save
-          </button>
-        </div>
+        {unauthorized ? (
+            <div className="mx-auto max-w-md bg-white p-8 shadow">
+              <h1 className={"text-5xl text-neutral-600"}>
+                Unauthorised. You are not a teacher.
+              </h1>
+            </div>
+        ) : (
+            <div className="mx-auto max-w-md bg-white p-8 shadow">
+                <input
+                    className="mb-4 w-full rounded border border-gray-300 px-3 py-2 focus:outline-none"
+                    placeholder="Enter the Title.."
+                    value={materialTitle}
+                    onChange={(e) => setMaterialTitle(e.target.value)}
+                />
+                <input
+                    className="mb-4 w-full rounded border border-gray-300 px-3 py-2 focus:outline-none"
+                    placeholder="Enter the URL.."
+                    value={materialURL}
+                    onChange={(e) => setMaterialURL(e.target.value)}
+                />
+                <button
+                    className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:outline-none"
+                    onClick={handleClick}
+                >
+                  Click me to save
+                </button>
+            </div>
+        )}
       </main>
     </div>
   );
 }
+
+// End of file

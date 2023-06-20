@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^4.21.7",
+    "@clerk/themes": "^1.7.5",
     "@t3-oss/env-nextjs": "^0.3.1",
     "firebase": "^9.22.2",
     "next": "^13.4.2",

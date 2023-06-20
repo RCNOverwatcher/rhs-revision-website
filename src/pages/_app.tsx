@@ -1,10 +1,19 @@
 import { type AppType } from "next/dist/shared/lib/utils";
 import "~/styles/globals.css";
 import { ClerkProvider, UserButton } from "@clerk/nextjs";
+import { dark } from "@clerk/themes";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      appearance={{
+        baseTheme: dark,
+        variables: {
+          colorPrimary: "#ae924a",
+          colorText: "white",
+        },
+      }}
+    >
       <div className="min-h-screen bg-gray-100">
         <header>
           <UserButton afterSignOutUrl="/" />

@@ -2,6 +2,7 @@ import { type AppType } from "next/dist/shared/lib/utils";
 import "~/styles/globals.css";
 import { ClerkProvider, UserButton } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
+import "@uploadthing/react/styles.css";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
@@ -16,7 +17,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
     >
       <div className="min-h-screen bg-gray-100">
         <header>
-          <UserButton afterSignOutUrl="/" />
+          <UserButton />
         </header>
         <Component {...pageProps} />
       </div>

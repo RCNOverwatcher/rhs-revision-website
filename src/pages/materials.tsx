@@ -13,6 +13,7 @@ interface MaterialData {
   id: string;
   name: string;
   url: string;
+  fileUrl: string;
 }
 
 const Home = () => {
@@ -53,21 +54,26 @@ const Home = () => {
   }, [getToken]);
 
   return (
-      <div>
-        <div className="container mx-auto py-8">
-          <h1 className="mb-4 text-3xl font-bold">Home Page</h1>
-          <div className="grid grid-cols-1 gap-4">
-            {materialArray.map((material) => (
-                <div key={material.id} className="bg-white p-4 shadow">
-                  <h3 className="mb-2 text-lg font-semibold">{material.name}</h3>
-                  <Link href={material.url} className="text-gray-600">
-                    {material.url}
-                  </Link>
-                </div>
-            ))}
-          </div>
+    <div>
+      <div className="container mx-auto py-8">
+        <h1 className="mb-4 text-3xl font-bold">Home Page</h1>
+        <div className="grid grid-cols-1 gap-4">
+          {materialArray.map((material) => (
+            <div key={material.id} className="bg-white p-4 shadow">
+              <h3 className="mb-2 text-lg font-semibold">{material.name}</h3>
+              <Link href={material.url} className="text-gray-600">
+                {material.url}
+              </Link>
+              {material.fileUrl && (
+                <button className="mt-4 flex rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700">
+                  <Link href={material.fileUrl}>Download</Link>
+                </button>
+              )}
+            </div>
+          ))}
         </div>
       </div>
+    </div>
   );
 };
 

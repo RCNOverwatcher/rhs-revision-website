@@ -7,7 +7,7 @@ const GCSEPage = () => {
       <ul className="mt-4 space-y-2">
         <li>
           <Link
-            href={"/subjects/gcse/art"}
+            href={"/materials/gcse/art"}
             className={"text-blue-500 hover:underline"}
           >
             Art
@@ -15,7 +15,7 @@ const GCSEPage = () => {
         </li>
         <li>
           <Link
-            href={"/subjects/gcse/biology"}
+            href={"/materials/gcse/biology"}
             className={"text-blue-500 hover:underline"}
           >
             Biology
@@ -23,7 +23,7 @@ const GCSEPage = () => {
         </li>
         <li>
           <Link
-            href={"/subjects/gcse/business"}
+            href={"/materials/gcse/business"}
             className={"text-blue-500 hover:underline"}
           >
             Business
@@ -31,7 +31,7 @@ const GCSEPage = () => {
         </li>
         <li>
           <Link
-            href={"/subjects/gcse/chemistry"}
+            href={"/materials/gcse/chemistry"}
             className={"text-blue-500 hover:underline"}
           >
             Chemistry
@@ -39,7 +39,7 @@ const GCSEPage = () => {
         </li>
         <li>
           <Link
-            href={"/subjects/gcse/computerscience"}
+            href={"/materials/gcse/computerscience"}
             className={"text-blue-500 hover:underline"}
           >
             Computer Science
@@ -47,7 +47,7 @@ const GCSEPage = () => {
         </li>
         <li>
           <Link
-            href={"/subjects/gcse/drama"}
+            href={"/materials/gcse/drama"}
             className={"text-blue-500 hover:underline"}
           >
             Drama
@@ -55,7 +55,7 @@ const GCSEPage = () => {
         </li>
         <li>
           <Link
-            href={"/subjects/gcse/dt"}
+            href={"/materials/gcse/dt"}
             className={"text-blue-500 hover:underline"}
           >
             DT
@@ -63,7 +63,7 @@ const GCSEPage = () => {
         </li>
         <li>
           <Link
-            href={"/subjects/gcse/engineering"}
+            href={"/materials/gcse/engineering"}
             className={"text-blue-500 hover:underline"}
           >
             Engineering
@@ -71,7 +71,7 @@ const GCSEPage = () => {
         </li>
         <li>
           <Link
-            href={"/subjects/gcse/english"}
+            href={"/materials/gcse/english"}
             className={"text-blue-500 hover:underline"}
           >
             English
@@ -79,7 +79,7 @@ const GCSEPage = () => {
         </li>
         <li>
           <Link
-            href={"/subjects/gcse/foodTechnology"}
+            href={"/materials/gcse/foodTechnology"}
             className={"text-blue-500 hover:underline"}
           >
             Food Technology
@@ -87,7 +87,7 @@ const GCSEPage = () => {
         </li>
         <li>
           <Link
-            href={"/subjects/gcse/french"}
+            href={"/materials/gcse/french"}
             className={"text-blue-500 hover:underline"}
           >
             French
@@ -95,7 +95,7 @@ const GCSEPage = () => {
         </li>
         <li>
           <Link
-            href={"/subjects/gcse/geography"}
+            href={"/materials/gcse/geography"}
             className={"text-blue-500 hover:underline"}
           >
             Geography
@@ -103,7 +103,7 @@ const GCSEPage = () => {
         </li>
         <li>
           <Link
-            href={"/subjects/gcse/geology"}
+            href={"/materials/gcse/geology"}
             className={"text-blue-500 hover:underline"}
           >
             Geology
@@ -111,7 +111,7 @@ const GCSEPage = () => {
         </li>
         <li>
           <Link
-            href={"/subjects/gcse/german"}
+            href={"/materials/gcse/german"}
             className={"text-blue-500 hover:underline"}
           >
             German
@@ -119,7 +119,7 @@ const GCSEPage = () => {
         </li>
         <li>
           <Link
-            href={"/subjects/gcse/general"}
+            href={"/materials/gcse/general"}
             className={"text-blue-500 hover:underline"}
           >
             General
@@ -127,7 +127,7 @@ const GCSEPage = () => {
         </li>
         <li>
           <Link
-            href={"/subjects/gcse/history"}
+            href={"/materials/gcse/history"}
             className={"text-blue-500 hover:underline"}
           >
             History
@@ -135,7 +135,7 @@ const GCSEPage = () => {
         </li>
         <li>
           <Link
-            href={"/subjects/gcse/maths"}
+            href={"/materials/gcse/maths"}
             className={"text-blue-500 hover:underline"}
           >
             Maths
@@ -143,7 +143,7 @@ const GCSEPage = () => {
         </li>
         <li>
           <Link
-            href={"/subjects/gcse/music"}
+            href={"/materials/gcse/music"}
             className={"text-blue-500 hover:underline"}
           >
             Music
@@ -151,7 +151,7 @@ const GCSEPage = () => {
         </li>
         <li>
           <Link
-            href={"/subjects/gcse/pe"}
+            href={"/materials/gcse/pe"}
             className={"text-blue-500 hover:underline"}
           >
             PE
@@ -159,7 +159,7 @@ const GCSEPage = () => {
         </li>
         <li>
           <Link
-            href={"/subjects/gcse/physics"}
+            href={"/materials/gcse/physics"}
             className={"text-blue-500 hover:underline"}
           >
             Physics
@@ -167,7 +167,7 @@ const GCSEPage = () => {
         </li>
         <li>
           <Link
-            href={"/subjects/gcse/re"}
+            href={"/materials/gcse/re"}
             className={"text-blue-500 hover:underline"}
           >
             RE

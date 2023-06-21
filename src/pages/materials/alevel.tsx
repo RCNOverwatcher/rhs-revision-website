@@ -6,7 +6,7 @@ const ALevelPage = () => {
       <ul className="mt-4 space-y-2">
         <li>
           <Link
-            href={`/subjects/alevel/art`}
+            href={`/materials/alevel/art`}
             className={"text-blue-500 hover:underline"}
           >
             Art
@@ -14,7 +14,7 @@ const ALevelPage = () => {
         </li>
         <li>
           <Link
-            href={`/subjects/alevel/biology`}
+            href={`/materials/alevel/biology`}
             className={"text-blue-500 hover:underline"}
           >
             Biology
@@ -22,7 +22,7 @@ const ALevelPage = () => {
         </li>
         <li>
           <Link
-            href={`/subjects/alevel/business`}
+            href={`/materials/alevel/business`}
             className={"text-blue-500 hover:underline"}
           >
             Business
@@ -30,7 +30,7 @@ const ALevelPage = () => {
         </li>
         <li>
           <Link
-            href={`/subjects/alevel/chemistry`}
+            href={`/materials/alevel/chemistry`}
             className={"text-blue-500 hover:underline"}
           >
             Chemistry
@@ -38,7 +38,7 @@ const ALevelPage = () => {
         </li>
         <li>
           <Link
-            href={`/subjects/alevel/computerscience`}
+            href={`/materials/alevel/computerscience`}
             className={"text-blue-500 hover:underline"}
           >
             Computer Science
@@ -46,7 +46,7 @@ const ALevelPage = () => {
         </li>
         <li>
           <Link
-            href={`/subjects/alevel/drama`}
+            href={`/materials/alevel/drama`}
             className={"text-blue-500 hover:underline"}
           >
             Drama
@@ -54,7 +54,7 @@ const ALevelPage = () => {
         </li>
         <li>
           <Link
-            href={`/subjects/alevel/dt`}
+            href={`/materials/alevel/dt`}
             className={"text-blue-500 hover:underline"}
           >
             DT
@@ -62,7 +62,7 @@ const ALevelPage = () => {
         </li>
         <li>
           <Link
-            href={`/subjects/alevel/economics`}
+            href={`/materials/alevel/economics`}
             className={"text-blue-500 hover:underline"}
           >
             Economics
@@ -70,7 +70,7 @@ const ALevelPage = () => {
         </li>
         <li>
           <Link
-            href={`/subjects/alevel/english`}
+            href={`/materials/alevel/english`}
             className={"text-blue-500 hover:underline"}
           >
             English
@@ -78,7 +78,7 @@ const ALevelPage = () => {
         </li>
         <li>
           <Link
-            href={`/subjects/alevel/french`}
+            href={`/materials/alevel/french`}
             className={"text-blue-500 hover:underline"}
           >
             French
@@ -86,7 +86,7 @@ const ALevelPage = () => {
         </li>
         <li>
           <Link
-            href={`/subjects/alevel/furthermaths`}
+            href={`/materials/alevel/furthermaths`}
             className={"text-blue-500 hover:underline"}
           >
             Further Maths
@@ -94,7 +94,7 @@ const ALevelPage = () => {
         </li>
         <li>
           <Link
-            href={`/subjects/alevel/geography`}
+            href={`/materials/alevel/geography`}
             className={"text-blue-500 hover:underline"}
           >
             Geography
@@ -102,7 +102,7 @@ const ALevelPage = () => {
         </li>
         <li>
           <Link
-            href={`/subjects/alevel/geology`}
+            href={`/materials/alevel/geology`}
             className={"text-blue-500 hover:underline"}
           >
             Geology
@@ -110,7 +110,7 @@ const ALevelPage = () => {
         </li>
         <li>
           <Link
-            href={`/subjects/alevel/german`}
+            href={`/materials/alevel/german`}
             className={"text-blue-500 hover:underline"}
           >
             German
@@ -118,7 +118,7 @@ const ALevelPage = () => {
         </li>
         <li>
           <Link
-            href={`/subjects/alevel/history`}
+            href={`/materials/alevel/history`}
             className={"text-blue-500 hover:underline"}
           >
             History
@@ -126,7 +126,7 @@ const ALevelPage = () => {
         </li>
         <li>
           <Link
-            href={`/subjects/alevel/maths`}
+            href={`/materials/alevel/maths`}
             className={"text-blue-500 hover:underline"}
           >
             Maths
@@ -134,7 +134,7 @@ const ALevelPage = () => {
         </li>
         <li>
           <Link
-            href={`/subjects/alevel/mediastudies`}
+            href={`/materials/alevel/mediastudies`}
             className={"text-blue-500 hover:underline"}
           >
             Media Studies
@@ -142,7 +142,7 @@ const ALevelPage = () => {
         </li>
         <li>
           <Link
-            href={`/subjects/alevel/music`}
+            href={`/materials/alevel/music`}
             className={"text-blue-500 hover:underline"}
           >
             Music
@@ -150,7 +150,7 @@ const ALevelPage = () => {
         </li>
         <li>
           <Link
-            href={`/subjects/alevel/pe`}
+            href={`/materials/alevel/pe`}
             className={"text-blue-500 hover:underline"}
           >
             PE
@@ -158,7 +158,7 @@ const ALevelPage = () => {
         </li>
         <li>
           <Link
-            href={`/subjects/alevel/physics`}
+            href={`/materials/alevel/physics`}
             className={"text-blue-500 hover:underline"}
           >
             Physics
@@ -166,7 +166,7 @@ const ALevelPage = () => {
         </li>
         <li>
           <Link
-            href={`/subjects/alevel/politics`}
+            href={`/materials/alevel/politics`}
             className={"text-blue-500 hover:underline"}
           >
             Politics
@@ -174,7 +174,7 @@ const ALevelPage = () => {
         </li>
         <li>
           <Link
-            href={`/subjects/alevel/productdesign`}
+            href={`/materials/alevel/productdesign`}
             className={"text-blue-500 hover:underline"}
           >
             Product Design
@@ -182,7 +182,7 @@ const ALevelPage = () => {
         </li>
         <li>
           <Link
-            href={`/subjects/alevel/psychology`}
+            href={`/materials/alevel/psychology`}
             className={"text-blue-500 hover:underline"}
           >
             Psychology
@@ -190,7 +190,7 @@ const ALevelPage = () => {
         </li>
         <li>
           <Link
-            href={`/subjects/alevel/re`}
+            href={`/materials/alevel/re`}
             className={"text-blue-500 hover:underline"}
           >
             RE

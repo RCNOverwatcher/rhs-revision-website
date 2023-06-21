@@ -44,6 +44,7 @@ const Submit = () => {
   }, [getToken]);
 
   const [materialTitle, setMaterialTitle] = useState("");
+  const [materialDescription, setMaterialDescription] = useState("");
   const [materialURL, setMaterialURL] = useState("");
   const [fileUrl, setFileUrl] = useState<string | undefined>(undefined);
   const [unauthorized, setUnauthorized] = useState(false);
@@ -142,16 +143,20 @@ const Submit = () => {
   const [value, setValue] = React.useState("");
 
   const { user } = useUser();
+
   const saveMaterial = async () => {
     try {
       const docRef = await addDoc(collection(db, "materials"), {
-        name: materialTitle,
-        url: z.string().url().parse(materialURL),
-        levelOfStudy: levelOfStudy,
-        selectedSubject: selectedSubject,
-        fileUrl: fileUrl,
+        name: z.string().parse(materialTitle),
+        description: z.string().parse(materialDescription),
+        url: z.string().parse(materialURL) || "",
+        levelOfStudy: z.string().parse(levelOfStudy),
+        selectedSubject: z.string().parse(selectedSubject),
+        fileUrl: z.string().url().optional().parse(fileUrl) || "",
+        timestamp: new Date(),
       });
       setMaterialTitle("");
+      setMaterialDescription("");
       setMaterialURL("");
       setFileUrl("");
       console.log("Material saved successfully:", docRef.id);
@@ -201,6 +206,12 @@ const Submit = () => {
               placeholder="Enter the Title.."
               value={materialTitle}
               onChange={(e) => setMaterialTitle(e.target.value)}
+            />
+            <textarea
+              className="mb-4 w-full rounded border border-gray-300 px-3 py-2 focus:outline-none"
+              placeholder="Enter the Description.."
+              value={materialDescription}
+              onChange={(e) => setMaterialDescription(e.target.value)}
             />
             <input
               className="mb-4 w-full rounded border border-gray-300 px-3 py-2 focus:outline-none"

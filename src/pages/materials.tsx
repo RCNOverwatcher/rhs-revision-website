@@ -1,4 +1,4 @@
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from "~/firebaseConfig";
 import { useState, useEffect } from "react";
 import { useAuth } from "@clerk/nextjs";
@@ -12,8 +12,10 @@ initializeApp(firebaseConfig);
 interface MaterialData {
   id: string;
   name: string;
+  description: string;
   url: string;
   fileUrl: string;
+  timestamp: number;
 }
 
 const Home = () => {
@@ -33,7 +35,9 @@ const Home = () => {
         await signInWithCustomToken(auth, token);
         console.log("User signed in successfully:", auth.currentUser);
 
-        const querySnapshot = await getDocs(collection(db, "materials"));
+        const querySnapshot = await getDocs(
+          query(collection(db, "materials"), orderBy("timestamp", "desc"))
+        );
         const materials = querySnapshot.docs.map((doc) => {
           const data = doc.data() as MaterialData;
           return {
@@ -61,6 +65,7 @@ const Home = () => {
           {materialArray.map((material) => (
             <div key={material.id} className="bg-white p-4 shadow">
               <h3 className="mb-2 text-lg font-semibold">{material.name}</h3>
+              <p className="mb-2 text-gray-600">{material.description}</p>
               <Link href={material.url} className="text-gray-600">
                 {material.url}
               </Link>

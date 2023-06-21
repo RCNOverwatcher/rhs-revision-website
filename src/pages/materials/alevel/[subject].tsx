@@ -5,8 +5,13 @@ import { db } from "~/firebaseConfig";
 import { useAuth } from "@clerk/nextjs";
 import { getAuth, signInWithCustomToken } from "firebase/auth";
 import Link from "next/link";
-import firebase from "firebase/compat";
-import DocumentData = firebase.firestore.DocumentData;
+
+interface Material {
+  id: string;
+  name: string;
+  url: string;
+  fileUrl: string;
+}
 
 const SubjectPage = () => {
   const { getToken } = useAuth();
@@ -34,8 +39,7 @@ const SubjectPage = () => {
 
   const router = useRouter();
   const { subject } = router.query;
-  const [materials, setMaterials] = useState<DocumentData[]>([]);
-
+  const [materials, setMaterials] = useState<Material[]>([]);
   useEffect(() => {
     const fetchMaterials = async () => {
       try {
@@ -47,6 +51,9 @@ const SubjectPage = () => {
         const querySnapshot = await getDocs(q);
         const data = querySnapshot.docs.map((doc) => ({
           id: doc.id,
+          name: doc.data().name as string,
+          url: doc.data().url as string,
+          fileUrl: doc.data().fileUrl as string,
           ...doc.data(),
         }));
         setMaterials(data);
@@ -67,7 +74,7 @@ const SubjectPage = () => {
       <div className="container mx-auto py-8">
         <h1 className="mb-4 text-3xl font-bold">{subject}</h1>
         <div className="grid grid-cols-1 gap-4">
-          {materials.map((material) => (
+          {materials.map((material: Material) => (
             <div key={material.id} className="bg-white p-4 shadow">
               <h3 className="mb-2 text-lg font-semibold">{material.name}</h3>
               <Link href={material.url} className="text-gray-600">

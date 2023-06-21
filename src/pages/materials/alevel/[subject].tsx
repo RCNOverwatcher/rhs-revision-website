@@ -5,6 +5,8 @@ import { db } from "~/firebaseConfig";
 import { useAuth } from "@clerk/nextjs";
 import { getAuth, signInWithCustomToken } from "firebase/auth";
 import Link from "next/link";
+import firebase from "firebase/compat";
+import DocumentData = firebase.firestore.DocumentData;
 
 const SubjectPage = () => {
   const { getToken } = useAuth();

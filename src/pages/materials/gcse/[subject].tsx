@@ -12,6 +12,93 @@ interface Material {
   fileUrl: string;
 }
 
+const subjects = [
+  {
+    value: "art",
+    label: "Art",
+  },
+  {
+    value: "biology",
+    label: "Biology",
+  },
+  {
+    value: "business",
+    label: "Business",
+  },
+  {
+    value: "chemistry",
+    label: "Chemistry",
+  },
+  {
+    value: "computerScience",
+    label: "Computer Science",
+  },
+  {
+    value: "drama",
+    label: "Drama",
+  },
+  {
+    value: "dt",
+    label: "DT",
+  },
+  {
+    value: "engineering",
+    label: "Engineering",
+  },
+  {
+    value: "english",
+    label: "English",
+  },
+  {
+    value: "foodTechnology",
+    label: "Food Technology",
+  },
+  {
+    value: "french",
+    label: "French",
+  },
+  {
+    value: "geography",
+    label: "Geography",
+  },
+  {
+    value: "geology",
+    label: "Geology",
+  },
+  {
+    value: "german",
+    label: "German",
+  },
+  {
+    value: "general",
+    label: "General",
+  },
+  {
+    value: "history",
+    label: "History",
+  },
+  {
+    value: "maths",
+    label: "Maths",
+  },
+  {
+    value: "music",
+    label: "Music",
+  },
+  {
+    value: "pe",
+    label: "PE",
+  },
+  {
+    value: "physics",
+    label: "Physics",
+  },
+  {
+    value: "re",
+    label: "RE",
+  },
+];
+
 const SubjectPage = () => {
   const { getToken } = useAuth();
 
@@ -39,6 +126,9 @@ const SubjectPage = () => {
   const router = useRouter();
   const { subject } = router.query;
   const [materials, setMaterials] = useState<Material[]>([]);
+
+  const item = subjects.find((item) => item.value === subject);
+  const label = item ? item.label : "";
 
   useEffect(() => {
     const fetchMaterials = async () => {
@@ -72,7 +162,7 @@ const SubjectPage = () => {
   return (
     <div>
       <div className="container mx-auto py-8">
-        <h1 className="mb-4 text-3xl font-bold">{subject}</h1>
+        <h1 className="mb-4 text-3xl font-bold">{label}</h1>
         <div className="grid grid-cols-1 gap-4">
           {materials.map((material: Material) => (
             <div key={material.id} className="bg-white p-4 shadow">

@@ -60,7 +60,6 @@ const Home = () => {
   return (
     <div>
       <div className="container mx-auto py-8">
-        <h1 className="mb-4 text-3xl font-bold">Home Page</h1>
         <div className="grid grid-cols-1 gap-4">
           {materialArray.map((material) => (
             <div key={material.id} className="bg-white p-4 shadow">

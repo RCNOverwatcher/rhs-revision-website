@@ -47,6 +47,7 @@ const Submit = () => {
   const [materialDescription, setMaterialDescription] = useState("");
   const [materialURL, setMaterialURL] = useState("");
   const [fileUrl, setFileUrl] = useState<string | undefined>(undefined);
+  const [fileKey, setFileKey] = useState<string | undefined>(undefined);
   const [unauthorized, setUnauthorized] = useState(false);
   const [levelOfStudy, setLevelOfStudy] = useState("All");
   const [selectedSubject, setSelectedSubject] = useState("General");
@@ -134,6 +135,9 @@ const Submit = () => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       setFileUrl(response[0].fileUrl);
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      setFileKey(response[0].fileKey);
     } else {
       setFileUrl(undefined);
     }
@@ -153,12 +157,14 @@ const Submit = () => {
         levelOfStudy: z.string().parse(levelOfStudy),
         selectedSubject: z.string().parse(selectedSubject),
         fileUrl: z.string().url().optional().parse(fileUrl) || "",
+        fileKey: z.string().optional().parse(fileKey) || "",
         timestamp: new Date(),
       });
       setMaterialTitle("");
       setMaterialDescription("");
       setMaterialURL("");
       setFileUrl("");
+      setFileKey("");
       console.log("Material saved successfully:", docRef.id);
     } catch (error) {
       console.error("Error saving material:", error);

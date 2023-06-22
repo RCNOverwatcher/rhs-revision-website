@@ -17,3 +17,8 @@ Stuff that is NOT implemented:
 - Better UI layout on homepage
 - Support for UI on mobile devices
 - Admin interface for managing database entries
+
+Admin login
+
+email: admin@richardhale.co.uk
+password: admin

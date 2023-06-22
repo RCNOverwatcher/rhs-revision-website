@@ -172,7 +172,7 @@ const Submit = () => {
 
     if (!isTeacher) {
       console.log(user?.primaryEmailAddress?.emailAddress);
-      console.log("User is not authorized to submit data.");
+      console.log("User is not authorized to submit new materials.");
       setUnauthorized(true);
       return;
     }

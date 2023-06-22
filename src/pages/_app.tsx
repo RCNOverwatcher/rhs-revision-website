@@ -4,6 +4,7 @@ import { ClerkProvider, UserButton } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import "@uploadthing/react/styles.css";
 import Link from "next/link";
+import { Analytics } from "@vercel/analytics/react";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
@@ -35,9 +36,12 @@ const MyApp: AppType = ({ Component, pageProps }) => {
           </div>
         </header>
         <Component {...pageProps} />
+        <Analytics />
       </div>
     </ClerkProvider>
   );
 };
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 export default MyApp;

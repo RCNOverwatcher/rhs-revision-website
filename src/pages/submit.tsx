@@ -1,10 +1,6 @@
 import Head from "next/head";
-import { db } from "~/firebaseConfig";
-import { collection, addDoc } from "firebase/firestore";
-import { useEffect, useState } from "react";
-import { useAuth, useUser } from "@clerk/nextjs";
-import { getAuth, signInWithCustomToken } from "firebase/auth";
-import { z } from "zod";
+import { useState } from "react";
+import { useUser } from "@clerk/nextjs";
 import * as React from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { UploadButton } from "~/lib/uploadthing";
@@ -20,29 +16,6 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from "~/components/popover";
 
 const Submit = () => {
-  const { getToken } = useAuth();
-
-  useEffect(() => {
-    const signInWithClerk = async () => {
-      const auth = getAuth();
-
-      try {
-        const token = await getToken({ template: "integration_firebase" });
-        if (!token) {
-          return;
-        }
-        const userCredentials = await signInWithCustomToken(auth, token);
-        console.log("User signed in successfully:", userCredentials.user);
-      } catch (error) {
-        console.log("An error occurred:", error);
-      }
-    };
-
-    signInWithClerk().catch((error) => {
-      console.log("An error occurred:", error);
-    });
-  }, [getToken]);
-
   const [materialTitle, setMaterialTitle] = useState("");
   const [materialDescription, setMaterialDescription] = useState("");
   const [materialURL, setMaterialURL] = useState("");
@@ -132,11 +105,9 @@ const Submit = () => {
 
   const handleApiResponse = (response: FileResponse[] | undefined) => {
     if (response) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
+      // @ts-expect-error idk
       setFileUrl(response[0].fileUrl);
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
+      // @ts-expect-error idk
       setFileKey(response[0].fileKey);
     } else {
       setFileUrl(undefined);
@@ -150,22 +121,28 @@ const Submit = () => {
 
   const saveMaterial = async () => {
     try {
-      const docRef = await addDoc(collection(db, "materials"), {
-        name: z.string().parse(materialTitle),
-        description: z.string().parse(materialDescription),
-        url: z.string().parse(materialURL) || "",
-        levelOfStudy: z.string().parse(levelOfStudy),
-        selectedSubject: z.string().parse(selectedSubject),
-        fileUrl: z.string().url().optional().parse(fileUrl) || "",
-        fileKey: z.string().optional().parse(fileKey) || "",
-        timestamp: new Date(),
+      await fetch(`/api/submitMaterials`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: materialTitle,
+          description: materialDescription,
+          url: materialURL,
+          level_of_study: levelOfStudy,
+          subject: selectedSubject,
+          file_key: fileKey,
+          file_url: fileUrl,
+          date_uploaded: new Date(),
+        }),
       });
       setMaterialTitle("");
       setMaterialDescription("");
       setMaterialURL("");
       setFileUrl("");
       setFileKey("");
-      console.log("Material saved successfully:", docRef.id);
+      console.log("Material saved successfully");
     } catch (error) {
       console.error("Error saving material:", error);
     }
@@ -244,7 +221,7 @@ const Submit = () => {
                 >
                   {value
                     ? subjectsByLevelOfStudy[levelOfStudy]?.find(
-                        (subject) => subject.value === value
+                        (subject) => subject.value === value,
                       )?.label || "Select subject..."
                     : "Select subject..."}
                   <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -266,14 +243,14 @@ const Submit = () => {
                           setOpen(false);
                           setSelectedSubject(currentValue);
                         }}
-                        className={" bg-gray-200"}
+                        className={"bg-gray-200"}
                       >
                         <Check
                           className={cn(
                             "mr-2 h-4 w-4",
                             value === subject.value
                               ? "opacity-100"
-                              : "opacity-0"
+                              : "opacity-0",
                           )}
                         />
                         {subject.label}
@@ -292,12 +269,12 @@ const Submit = () => {
             <UploadButton
               endpoint="imageUploader"
               onClientUploadComplete={(res) => {
+                // @ts-expect-error test
                 handleApiResponse(res);
                 console.log("Files: ", res);
                 alert("Upload Completed");
               }}
               onUploadError={(error: Error) => {
-                // Do something with the error.
                 alert(`ERROR! ${error.message}`);
               }}
             />
@@ -309,5 +286,3 @@ const Submit = () => {
 };
 
 export default Submit;
-
-// Path: src\pages\subjects\index.tsx

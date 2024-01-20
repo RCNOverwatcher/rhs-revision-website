@@ -136,7 +136,7 @@ const SubjectPage = () => {
         const q = query(
           collection(db, "materials"),
           where("selectedSubject", "==", subject),
-          where("levelOfStudy", "==", "GCSE")
+          where("levelOfStudy", "==", "GCSE"),
         );
         const querySnapshot = await getDocs(q);
         const data = querySnapshot.docs.map((doc) => ({

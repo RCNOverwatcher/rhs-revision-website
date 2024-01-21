@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import * as React from "react";
+import { z } from "zod";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { UploadButton } from "~/lib/uploadthing";
 import { cn } from "~/lib/utils";
@@ -119,8 +120,29 @@ const Submit = () => {
 
   const { user } = useUser();
 
+  const schema = z.object({
+    title: z.string().min(5).max(100),
+    description: z.string().optional(),
+    url: z.string().optional(),
+    level_of_study: z.string(),
+    subject: z.string(),
+    file_key: z.string().optional(),
+    file_url: z.string().optional(),
+    date_uploaded: z.date(),
+  });
+
   const saveMaterial = async () => {
     try {
+      schema.parse({
+        title: materialTitle,
+        description: materialDescription,
+        url: materialURL,
+        level_of_study: levelOfStudy,
+        subject: selectedSubject,
+        file_key: fileKey,
+        file_url: fileUrl,
+        date_uploaded: new Date(),
+      });
       await fetch(`/api/submitMaterials`, {
         method: "POST",
         headers: {

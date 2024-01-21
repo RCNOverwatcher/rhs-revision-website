@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import * as React from "react";
-import { z, ZodError } from "zod";
+import { z } from "zod";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { UploadButton } from "~/lib/uploadthing";
 import { cn } from "~/lib/utils";

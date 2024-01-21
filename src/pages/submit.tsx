@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import * as React from "react";
-import { z } from "zod";
+import { z, ZodError } from "zod";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { UploadButton } from "~/lib/uploadthing";
 import { cn } from "~/lib/utils";
@@ -15,6 +15,81 @@ import {
   CommandItem,
 } from "~/components/command";
 import { Popover, PopoverContent, PopoverTrigger } from "~/components/popover";
+import { useToast } from "~/components/use-toast";
+
+type Subject = {
+  value: string;
+  label: string;
+};
+
+const subjectsByLevelOfStudy: Record<string, Subject[]> = {
+  All: [
+    { value: "general", label: "General" },
+    { value: "maths", label: "Maths" },
+    { value: "science", label: "Science" },
+    { value: "english", label: "English" },
+    { value: "computer_science", label: "Computer Science" },
+    { value: "history", label: "History" },
+    { value: "geography", label: "Geography" },
+    { value: "business", label: "Business" },
+    { value: "psychology", label: "Psychology" },
+    { value: "economics", label: "Economics" },
+    { value: "politics", label: "Politics" },
+    { value: "drama", label: "Drama" },
+  ],
+  GCSE: [
+    { value: "art", label: "Art" },
+    { value: "biology", label: "Biology" },
+    { value: "business", label: "Business" },
+    { value: "chemistry", label: "Chemistry" },
+    { value: "computer_science", label: "Computer Science" },
+    { value: "drama", label: "Drama" },
+    { value: "dt", label: "DT" },
+    { value: "engineering", label: "Engineering" },
+    { value: "english", label: "English" },
+    { value: "food_technology", label: "Food Technology" },
+    { value: "french", label: "French" },
+    { value: "geography", label: "Geography" },
+    { value: "geology", label: "Geology" },
+    { value: "german", label: "German" },
+    { value: "general", label: "General" },
+    { value: "history", label: "History" },
+    { value: "maths", label: "Maths" },
+    { value: "music", label: "Music" },
+    { value: "pe", label: "PE" },
+    { value: "physics", label: "Physics" },
+    { value: "re", label: "RE" },
+  ],
+  ALevel: [
+    { value: "general", label: "General" },
+    { value: "art", label: "Art" },
+    { value: "biology", label: "Biology" },
+    { value: "business", label: "Business" },
+    { value: "chemistry", label: "Chemistry" },
+    { value: "computer_science", label: "Computer Science" },
+    { value: "drama", label: "Drama" },
+    { value: "economics", label: "Economics" },
+    { value: "english", label: "English" },
+    { value: "french", label: "French" },
+    { value: "further_maths", label: "Further Maths" },
+    { value: "geography", label: "Geography" },
+    { value: "geology", label: "Geology" },
+    { value: "german", label: "German" },
+    { value: "history", label: "History" },
+    { value: "maths", label: "Maths" },
+    { value: "media_studies", label: "Media Studies" },
+    { value: "music", label: "Music" },
+    { value: "pe", label: "PE" },
+    { value: "physics", label: "Physics" },
+    { value: "politics", label: "Politics" },
+    { value: "product_design", label: "Product Design" },
+    { value: "psychology", label: "Psychology" },
+    { value: "re", label: "RE" },
+    { value: "btec_sport", label: "BTEC Sport Studies" },
+    { value: "btec_business", label: "BTEC Business Studies" },
+    { value: "btec_science", label: "BTEC Science" },
+  ],
+};
 
 const Submit = () => {
   const [materialTitle, setMaterialTitle] = useState("");
@@ -26,90 +101,19 @@ const Submit = () => {
   const [levelOfStudy, setLevelOfStudy] = useState("All");
   const [selectedSubject, setSelectedSubject] = useState("general");
 
-  type Subject = {
-    value: string;
-    label: string;
-  };
-
-  const subjectsByLevelOfStudy: Record<string, Subject[]> = {
-    All: [
-      { value: "general", label: "General" },
-      { value: "maths", label: "Maths" },
-      { value: "science", label: "Science" },
-      { value: "english", label: "English" },
-      { value: "computer_science", label: "Computer Science" },
-      { value: "history", label: "History" },
-      { value: "geography", label: "Geography" },
-      { value: "business", label: "Business" },
-      { value: "psychology", label: "Psychology" },
-      { value: "economics", label: "Economics" },
-      { value: "politics", label: "Politics" },
-      { value: "drama", label: "Drama" },
-    ],
-    GCSE: [
-      { value: "art", label: "Art" },
-      { value: "biology", label: "Biology" },
-      { value: "business", label: "Business" },
-      { value: "chemistry", label: "Chemistry" },
-      { value: "computer_science", label: "Computer Science" },
-      { value: "drama", label: "Drama" },
-      { value: "dt", label: "DT" },
-      { value: "engineering", label: "Engineering" },
-      { value: "english", label: "English" },
-      { value: "food_technology", label: "Food Technology" },
-      { value: "french", label: "French" },
-      { value: "geography", label: "Geography" },
-      { value: "geology", label: "Geology" },
-      { value: "german", label: "German" },
-      { value: "general", label: "General" },
-      { value: "history", label: "History" },
-      { value: "maths", label: "Maths" },
-      { value: "music", label: "Music" },
-      { value: "pe", label: "PE" },
-      { value: "physics", label: "Physics" },
-      { value: "re", label: "RE" },
-    ],
-    ALevel: [
-      { value: "general", label: "General" },
-      { value: "art", label: "Art" },
-      { value: "biology", label: "Biology" },
-      { value: "business", label: "Business" },
-      { value: "chemistry", label: "Chemistry" },
-      { value: "computer_science", label: "Computer Science" },
-      { value: "drama", label: "Drama" },
-      { value: "economics", label: "Economics" },
-      { value: "english", label: "English" },
-      { value: "french", label: "French" },
-      { value: "further_maths", label: "Further Maths" },
-      { value: "geography", label: "Geography" },
-      { value: "geology", label: "Geology" },
-      { value: "german", label: "German" },
-      { value: "history", label: "History" },
-      { value: "maths", label: "Maths" },
-      { value: "media_studies", label: "Media Studies" },
-      { value: "music", label: "Music" },
-      { value: "pe", label: "PE" },
-      { value: "physics", label: "Physics" },
-      { value: "politics", label: "Politics" },
-      { value: "product_design", label: "Product Design" },
-      { value: "psychology", label: "Psychology" },
-      { value: "re", label: "RE" },
-      { value: "btec_sport", label: "BTEC Sport Studies" },
-      { value: "btec_business", label: "BTEC Business Studies" },
-      { value: "btec_science", label: "BTEC Science" },
-    ],
-  };
   interface FileResponse {
-    fileUrl: string;
-    fileKey: string;
+    url: string;
+    key: string;
   }
+
+  const { toast } = useToast();
 
   const handleApiResponse = (response: FileResponse[] | undefined) => {
     if (response) {
       // @ts-expect-error idk
-      setFileUrl(response[0].fileUrl);
+      setFileUrl(response[0].url);
       // @ts-expect-error idk
-      setFileKey(response[0].fileKey);
+      setFileKey(response[0].key);
     } else {
       setFileUrl(undefined);
     }
@@ -165,7 +169,17 @@ const Submit = () => {
       setFileUrl("");
       setFileKey("");
       console.log("Material saved successfully");
+      toast({
+        title: "Material saved successfully.",
+        description: "Your material has been saved.",
+        className: "bg-green-400",
+      });
     } catch (error) {
+      toast({
+        title: "An error occurred.",
+        description: "Unable to save material.",
+        variant: "destructive",
+      });
       console.error("Error saving material:", error);
     }
   };
@@ -291,13 +305,14 @@ const Submit = () => {
             <UploadButton
               endpoint="imageUploader"
               onClientUploadComplete={(res) => {
-                // @ts-expect-error test
                 handleApiResponse(res);
-                console.log("Files: ", res);
-                alert("Upload Completed");
               }}
               onUploadError={(error: Error) => {
-                alert(`ERROR! ${error.message}`);
+                toast({
+                  title: "An error occurred.",
+                  description: "Unable to upload file.",
+                });
+                console.error("Error uploading file:", error);
               }}
             />
           </div>

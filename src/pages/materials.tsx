@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Head from "next/head";
+import * as React from "react";
 
 interface MaterialData {
   material_id: number;
@@ -32,7 +34,15 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <main>
+      <Head>
+        <title>RHS Revision Platform - Materials</title>
+        <meta
+          name="description"
+          content="Richard Hale School Revision Platform - Materials"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className="container mx-auto py-8">
         <div className="grid grid-cols-1 gap-4">
           {materialArray && materialArray.length > 0 ? (
@@ -53,11 +63,11 @@ const Home = () => {
               </div>
             ))
           ) : (
-            <p>Loading materials...</p>
+            <></>
           )}
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 

@@ -1,6 +1,8 @@
 import { useRouter } from "next/router";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import Head from "next/head";
+import * as React from "react";
 
 interface Material {
   title: string;
@@ -121,7 +123,6 @@ const subjects = [
 ];
 
 const SubjectPage = () => {
-
   const router = useRouter();
   const { subject } = router.query;
   const [materials, setMaterials] = useState<Material[]>([]);
@@ -135,7 +136,9 @@ const SubjectPage = () => {
   useEffect(() => {
     const fetchMaterials = async () => {
       try {
-        const data = await fetch(`/api/fetchMaterialsBySubject_alevel?subject=${subject as string}`);
+        const data = await fetch(
+          `/api/fetchMaterialsBySubject_alevel?subject=${subject as string}`,
+        );
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const material = await data.json();
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
@@ -150,17 +153,23 @@ const SubjectPage = () => {
     });
   }, [subject]);
 
-
-
   return (
-    <div>
+    <main>
+      <Head>
+        <title>RHS Revision Platform - A-Level Materials</title>
+        <meta
+          name="description"
+          content="Richard Hale School Revision Platform - A-Level Materials"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className="container mx-auto py-8">
         <h1 className="mb-4 text-3xl font-bold">{label}</h1>
         <div className="grid grid-cols-1 gap-4">
           {materials.map((material: Material) => (
             <div key={material.title} className="bg-white p-4 shadow">
               <h3 className="mb-2 text-lg font-semibold">{material.title}</h3>
-                <p className="mb-2 text-gray-600">{material.description}</p>
+              <p className="mb-2 text-gray-600">{material.description}</p>
               <Link href={material.url} className="text-gray-600">
                 {material.url}
               </Link>
@@ -168,7 +177,7 @@ const SubjectPage = () => {
           ))}
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 

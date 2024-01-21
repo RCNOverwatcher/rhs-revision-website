@@ -1,19 +1,17 @@
 import { useRouter } from "next/router";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import Head from "next/head";
+import * as React from "react";
 
 interface Material {
-  id: string;
-  name: string;
+  title: string;
+  description: string;
   url: string;
   fileUrl: string;
 }
 
 const subjects = [
-  {
-    value: "general",
-    label: "General",
-  },
   {
     value: "art",
     label: "Art",
@@ -31,7 +29,7 @@ const subjects = [
     label: "Chemistry",
   },
   {
-    value: "computer_science",
+    value: "computerScience",
     label: "Computer Science",
   },
   {
@@ -39,20 +37,24 @@ const subjects = [
     label: "Drama",
   },
   {
-    value: "economics",
-    label: "Economics",
+    value: "dt",
+    label: "DT",
+  },
+  {
+    value: "engineering",
+    label: "Engineering",
   },
   {
     value: "english",
     label: "English",
   },
   {
-    value: "french",
-    label: "French",
+    value: "foodTechnology",
+    label: "Food Technology",
   },
   {
-    value: "further_maths",
-    label: "Further Maths",
+    value: "french",
+    label: "French",
   },
   {
     value: "geography",
@@ -67,16 +69,16 @@ const subjects = [
     label: "German",
   },
   {
+    value: "general",
+    label: "General",
+  },
+  {
     value: "history",
     label: "History",
   },
   {
     value: "maths",
     label: "Maths",
-  },
-  {
-    value: "media_studies",
-    label: "Media Studies",
   },
   {
     value: "music",
@@ -91,37 +93,12 @@ const subjects = [
     label: "Physics",
   },
   {
-    value: "politics",
-    label: "Politics",
-  },
-  {
-    value: "product_design",
-    label: "Product Design",
-  },
-  {
-    value: "psychology",
-    label: "Psychology",
-  },
-  {
     value: "re",
     label: "RE",
-  },
-  {
-    value: "btec_sport",
-    label: "BTEC Sport",
-  },
-  {
-    value: "btec_business",
-    label: "BTEC Business ",
-  },
-  {
-    value: "btec_science",
-    label: "BTEC Science",
   },
 ];
 
 const SubjectPage = () => {
-
   const router = useRouter();
   const { subject } = router.query;
   const [materials, setMaterials] = useState<Material[]>([]);
@@ -135,12 +112,13 @@ const SubjectPage = () => {
   useEffect(() => {
     const fetchMaterials = async () => {
       try {
-        const data = await fetch(`/api/fetchMaterialsBySubject_gcse?subject=${subject as string}`);
+        const data = await fetch(
+          `/api/fetchMaterialsBySubject_gcse?subject=${subject as string}`,
+        );
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const material = await data.json();
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         setMaterials(material);
-        console.log(material);
       } catch (error) {
         console.error("Error fetching materials:", error);
       }
@@ -151,24 +129,31 @@ const SubjectPage = () => {
     });
   }, [subject]);
 
-
-
   return (
-      <div>
-        <div className="container mx-auto py-8">
-          <h1 className="mb-4 text-3xl font-bold">{label}</h1>
-          <div className="grid grid-cols-1 gap-4">
-            {materials.map((material: Material) => (
-                <div key={material.id} className="bg-white p-4 shadow">
-                  <h3 className="mb-2 text-lg font-semibold">{material.name}</h3>
-                  <Link href={material.url} className="text-gray-600">
-                    {material.url}
-                  </Link>
-                </div>
-            ))}
-          </div>
+    <main>
+      <Head>
+        <title>RHS Revision Platform - GCSE Materials</title>
+        <meta
+          name="description"
+          content="Richard Hale School Revision Platform - GCSE Materials"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <div className="container mx-auto py-8">
+        <h1 className="mb-4 text-3xl font-bold">{label}</h1>
+        <div className="grid grid-cols-1 gap-4">
+          {materials.map((material: Material) => (
+            <div key={material.title} className="bg-white p-4 shadow">
+              <h3 className="mb-2 text-lg font-semibold">{material.title}</h3>
+              <p className="mb-2 text-gray-600">{material.description}</p>
+              <Link href={material.url} className="text-gray-600">
+                {material.url}
+              </Link>
+            </div>
+          ))}
         </div>
       </div>
+    </main>
   );
 };
 

@@ -5,6 +5,7 @@ import { dark } from "@clerk/themes";
 import "@uploadthing/react/styles.css";
 import Link from "next/link";
 import { Analytics } from "@vercel/analytics/react";
+import { Toaster } from "~/components/toaster";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
@@ -36,6 +37,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
           </div>
         </header>
         <Component {...pageProps} />
+        <Toaster />
         <Analytics />
       </div>
     </ClerkProvider>

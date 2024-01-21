@@ -1,10 +1,7 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { db } from "~/firebaseConfig";
-import { useAuth } from "@clerk/nextjs";
-import { getAuth, signInWithCustomToken } from "firebase/auth";
+import {useEffect, useState} from "react";
 import Link from "next/link";
+
 interface Material {
   id: string;
   name: string;
@@ -13,6 +10,10 @@ interface Material {
 }
 
 const subjects = [
+  {
+    value: "general",
+    label: "General",
+  },
   {
     value: "art",
     label: "Art",
@@ -30,7 +31,7 @@ const subjects = [
     label: "Chemistry",
   },
   {
-    value: "computerScience",
+    value: "computer_science",
     label: "Computer Science",
   },
   {
@@ -38,24 +39,20 @@ const subjects = [
     label: "Drama",
   },
   {
-    value: "dt",
-    label: "DT",
-  },
-  {
-    value: "engineering",
-    label: "Engineering",
+    value: "economics",
+    label: "Economics",
   },
   {
     value: "english",
     label: "English",
   },
   {
-    value: "foodTechnology",
-    label: "Food Technology",
-  },
-  {
     value: "french",
     label: "French",
+  },
+  {
+    value: "further_maths",
+    label: "Further Maths",
   },
   {
     value: "geography",
@@ -70,16 +67,16 @@ const subjects = [
     label: "German",
   },
   {
-    value: "general",
-    label: "General",
-  },
-  {
     value: "history",
     label: "History",
   },
   {
     value: "maths",
     label: "Maths",
+  },
+  {
+    value: "media_studies",
+    label: "Media Studies",
   },
   {
     value: "music",
@@ -94,87 +91,84 @@ const subjects = [
     label: "Physics",
   },
   {
+    value: "politics",
+    label: "Politics",
+  },
+  {
+    value: "product_design",
+    label: "Product Design",
+  },
+  {
+    value: "psychology",
+    label: "Psychology",
+  },
+  {
     value: "re",
     label: "RE",
+  },
+  {
+    value: "btec_sport",
+    label: "BTEC Sport",
+  },
+  {
+    value: "btec_business",
+    label: "BTEC Business ",
+  },
+  {
+    value: "btec_science",
+    label: "BTEC Science",
   },
 ];
 
 const SubjectPage = () => {
-  const { getToken } = useAuth();
-
-  useEffect(() => {
-    const signInWithClerk = async () => {
-      const auth = getAuth();
-
-      try {
-        const token = await getToken({ template: "integration_firebase" });
-        if (!token) {
-          return;
-        }
-        const userCredentials = await signInWithCustomToken(auth, token);
-        console.log("User signed in successfully:", userCredentials.user);
-      } catch (error) {
-        console.log("An error occurred:", error);
-      }
-    };
-
-    signInWithClerk().catch((error) => {
-      console.log("An error occurred:", error);
-    });
-  }, [getToken]);
 
   const router = useRouter();
   const { subject } = router.query;
   const [materials, setMaterials] = useState<Material[]>([]);
 
-  const item = subjects.find((item) => item.value === subject);
-  const label = item ? item.label : "";
+  function getLabelByValue(value: string): string | undefined {
+    const subject = subjects.find((subject) => subject.value === value);
+    return subject ? subject.label : undefined;
+  }
+  const label = getLabelByValue(subject as string);
 
   useEffect(() => {
     const fetchMaterials = async () => {
       try {
-        const q = query(
-          collection(db, "materials"),
-          where("selectedSubject", "==", subject),
-          where("levelOfStudy", "==", "GCSE"),
-        );
-        const querySnapshot = await getDocs(q);
-        const data = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          name: doc.data().name as string,
-          url: doc.data().url as string,
-          fileUrl: doc.data().fileUrl as string,
-          ...doc.data(),
-        }));
-        setMaterials(data);
+        const data = await fetch(`/api/fetchMaterialsBySubject_gcse?subject=${subject as string}`);
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        const material = await data.json();
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+        setMaterials(material);
+        console.log(material);
       } catch (error) {
         console.error("Error fetching materials:", error);
       }
     };
 
-    if (subject) {
-      fetchMaterials().catch((error) => {
-        console.error("Error fetching materials:", error);
-      });
-    }
+    fetchMaterials().catch((error) => {
+      console.error("Error fetching materials:", error);
+    });
   }, [subject]);
 
+
+
   return (
-    <div>
-      <div className="container mx-auto py-8">
-        <h1 className="mb-4 text-3xl font-bold">{label}</h1>
-        <div className="grid grid-cols-1 gap-4">
-          {materials.map((material: Material) => (
-            <div key={material.id} className="bg-white p-4 shadow">
-              <h3 className="mb-2 text-lg font-semibold">{material.name}</h3>
-              <Link href={material.url} className="text-gray-600">
-                {material.url}
-              </Link>
-            </div>
-          ))}
+      <div>
+        <div className="container mx-auto py-8">
+          <h1 className="mb-4 text-3xl font-bold">{label}</h1>
+          <div className="grid grid-cols-1 gap-4">
+            {materials.map((material: Material) => (
+                <div key={material.id} className="bg-white p-4 shadow">
+                  <h3 className="mb-2 text-lg font-semibold">{material.name}</h3>
+                  <Link href={material.url} className="text-gray-600">
+                    {material.url}
+                  </Link>
+                </div>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
   );
 };
 

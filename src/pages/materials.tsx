@@ -37,7 +37,7 @@ const Home = () => {
         <div className="grid grid-cols-1 gap-4">
           {materialArray && materialArray.length > 0 ? (
             materialArray.map((material) => (
-              <div key={material.material_id} className="">
+              <div key={material.material_id} className="bg-white p-4 shadow">
                 <h3 className="mb-2 text-lg font-semibold">{material.title}</h3>
                 <p className="mb-2 text-gray-600">{material.description}</p>
                 {material.url && (

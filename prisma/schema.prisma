@@ -1,0 +1,20 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model materials {
+  title          String   @id @db.VarChar(255)
+  description    String?  @db.VarChar(255)
+  subject        String   @db.VarChar(255)
+  level_of_study String   @db.VarChar(255)
+  file_key       String?  @db.VarChar(255)
+  file_url       String?  @db.VarChar(255)
+  url            String?  @db.VarChar(255)
+  date_uploaded  DateTime
+}

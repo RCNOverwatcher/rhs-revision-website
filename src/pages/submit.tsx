@@ -23,7 +23,7 @@ const Submit = () => {
   const [fileKey, setFileKey] = useState<string | undefined>(undefined);
   const [unauthorized, setUnauthorized] = useState(false);
   const [levelOfStudy, setLevelOfStudy] = useState("All");
-  const [selectedSubject, setSelectedSubject] = useState("General");
+  const [selectedSubject, setSelectedSubject] = useState("general");
 
   type Subject = {
     value: string;
@@ -36,7 +36,7 @@ const Submit = () => {
       { value: "maths", label: "Maths" },
       { value: "science", label: "Science" },
       { value: "english", label: "English" },
-      { value: "computerScience", label: "Computer Science" },
+      { value: "computer_science", label: "Computer Science" },
       { value: "history", label: "History" },
       { value: "geography", label: "Geography" },
       { value: "business", label: "Business" },
@@ -50,12 +50,12 @@ const Submit = () => {
       { value: "biology", label: "Biology" },
       { value: "business", label: "Business" },
       { value: "chemistry", label: "Chemistry" },
-      { value: "computerScience", label: "Computer Science" },
+      { value: "computer_science", label: "Computer Science" },
       { value: "drama", label: "Drama" },
       { value: "dt", label: "DT" },
       { value: "engineering", label: "Engineering" },
       { value: "english", label: "English" },
-      { value: "foodTechnology", label: "Food Technology" },
+      { value: "food_technology", label: "Food Technology" },
       { value: "french", label: "French" },
       { value: "geography", label: "Geography" },
       { value: "geology", label: "Geology" },
@@ -74,28 +74,28 @@ const Submit = () => {
       { value: "biology", label: "Biology" },
       { value: "business", label: "Business" },
       { value: "chemistry", label: "Chemistry" },
-      { value: "computerScience", label: "Computer Science" },
+      { value: "computer_science", label: "Computer Science" },
       { value: "drama", label: "Drama" },
       { value: "economics", label: "Economics" },
       { value: "english", label: "English" },
       { value: "french", label: "French" },
-      { value: "furtherMaths", label: "Further Maths" },
+      { value: "further_maths", label: "Further Maths" },
       { value: "geography", label: "Geography" },
       { value: "geology", label: "Geology" },
       { value: "german", label: "German" },
       { value: "history", label: "History" },
       { value: "maths", label: "Maths" },
-      { value: "mediaStudies", label: "Media Studies" },
+      { value: "media_studies", label: "Media Studies" },
       { value: "music", label: "Music" },
       { value: "pe", label: "PE" },
       { value: "physics", label: "Physics" },
       { value: "politics", label: "Politics" },
-      { value: "productDesign", label: "Product Design" },
+      { value: "product_design", label: "Product Design" },
       { value: "psychology", label: "Psychology" },
       { value: "re", label: "RE" },
-      { value: "btecSportStudies", label: "BTEC Sport Studies" },
-      { value: "btecBusinessStudies", label: "BTEC Business Studies" },
-      { value: "btecScience", label: "BTEC Science" },
+      { value: "btec_sport", label: "BTEC Sport Studies" },
+      { value: "btec_business", label: "BTEC Business Studies" },
+      { value: "btec_science", label: "BTEC Science" },
     ],
   };
   interface FileResponse {

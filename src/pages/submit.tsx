@@ -219,7 +219,7 @@ const Submit = () => {
             </h1>
           </div>
         ) : (
-            <div className="mx-auto max-w-md bg-blue-800 shadow p-10 rounded-2xl">
+            <div className="mx-auto max-w-2xl bg-blue-500 shadow px-10 rounded-2xl py-16">
               <h1 className="mb-4 text-4xl font-bold text-white text-center">Submit Materials</h1>
               <input
                   className="mb-4 w-full rounded border border-gray-300 px-3 py-2 focus:outline-none"
@@ -275,6 +275,7 @@ const Submit = () => {
                       {subjectsByLevelOfStudy[levelOfStudy]?.map((subject) => (
                           <CommandItem
                               key={subject.value}
+                              value={subject.value}
                               onSelect={(currentValue) => {
                                 setValue(currentValue === value ? "" : currentValue);
                                 setOpen(false);
@@ -297,12 +298,6 @@ const Submit = () => {
                   </Command>
                 </PopoverContent>
               </Popover>
-              <button
-                  className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:outline-none"
-                  onClick={handleClick}
-              >
-                Click me to save
-              </button>
               <UploadButton
                   endpoint="imageUploader"
                   onClientUploadComplete={(res) => {
@@ -316,6 +311,12 @@ const Submit = () => {
                     console.error("Error uploading file:", error);
                   }}
               />
+              <Button
+                  className="rounded bg-blue-500 px-4 py-5 text-white hover:bg-blue-600 focus:outline-none float-right "
+                  onClick={handleClick}
+              >
+                Save and Upload Material
+              </Button>
             </div>
         )}
       </main>

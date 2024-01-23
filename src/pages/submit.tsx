@@ -219,105 +219,107 @@ const Submit = () => {
             </h1>
           </div>
         ) : (
-            <div className="mx-auto max-w-2xl bg-blue-500 shadow px-10 rounded-2xl py-16">
-              <h1 className="mb-4 text-4xl font-bold text-white text-center">Submit Materials</h1>
-              <input
-                  className="mb-4 w-full rounded border border-gray-300 px-3 py-2 focus:outline-none"
-                  placeholder="Enter the Title.."
-                  value={materialTitle}
-                  onChange={(e) => setMaterialTitle(e.target.value)}
-              />
-              <textarea
-                  className="mb-4 w-full rounded border border-gray-300 px-3 py-2 focus:outline-none"
-                  placeholder="Enter the Description.."
-                  value={materialDescription}
-                  onChange={(e) => setMaterialDescription(e.target.value)}
-              />
-              <input
-                  className="mb-4 w-full rounded border border-gray-300 px-3 py-2 focus:outline-none"
-                  placeholder="Enter the URL.."
-                  value={materialURL}
-                  onChange={(e) => setMaterialURL(e.target.value)}
-              />
-              <select
-                  className="mb-4 w-full rounded border border-gray-300 px-3 py-2 focus:outline-none"
-                  value={levelOfStudy}
-                  onChange={(e) => setLevelOfStudy(e.target.value)}
-              >
-                <option value="All">All</option>
-                <option value="GCSE">GCSE</option>
-                <option value="ALevel">A-Level</option>
-              </select>
-              <Popover open={open} onOpenChange={setOpen}>
-                <PopoverTrigger asChild>
-                  <Button
-                      variant="outline"
-                      role="combobox"
-                      aria-expanded={open}
-                      className="w-[200px] justify-between bg-white"
-                  >
-                    {value
-                        ? subjectsByLevelOfStudy[levelOfStudy]?.find(
+          <div className="mx-auto max-w-2xl rounded-2xl bg-blue-500 px-10 py-16 shadow">
+            <h1 className="mb-4 text-center text-4xl font-bold text-white">
+              Submit Materials
+            </h1>
+            <input
+              className="mb-4 w-full rounded border border-gray-300 px-3 py-2 focus:outline-none"
+              placeholder="Enter the Title.."
+              value={materialTitle}
+              onChange={(e) => setMaterialTitle(e.target.value)}
+            />
+            <textarea
+              className="mb-4 w-full rounded border border-gray-300 px-3 py-2 focus:outline-none"
+              placeholder="Enter the Description.."
+              value={materialDescription}
+              onChange={(e) => setMaterialDescription(e.target.value)}
+            />
+            <input
+              className="mb-4 w-full rounded border border-gray-300 px-3 py-2 focus:outline-none"
+              placeholder="Enter the URL.."
+              value={materialURL}
+              onChange={(e) => setMaterialURL(e.target.value)}
+            />
+            <select
+              className="mb-4 w-full rounded border border-gray-300 px-3 py-2 focus:outline-none"
+              value={levelOfStudy}
+              onChange={(e) => setLevelOfStudy(e.target.value)}
+            >
+              <option value="All">All</option>
+              <option value="GCSE">GCSE</option>
+              <option value="ALevel">A-Level</option>
+            </select>
+            <Popover open={open} onOpenChange={setOpen}>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  role="combobox"
+                  aria-expanded={open}
+                  className="w-[200px] justify-between bg-white"
+                >
+                  {value
+                    ? subjectsByLevelOfStudy[levelOfStudy]?.find(
                         (subject) => subject.value === value,
-                    )?.label || "Select subject..."
-                        : "Select subject..."}
-                    <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50"/>
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-[200px] border-b-black p-0">
-                  <Command>
-                    <CommandInput
-                        placeholder="Search subject..."
-                        className={"rounded"}
-                    />
-                    <CommandEmpty>No subject found.</CommandEmpty>
-                    <CommandGroup className={"rounded-2xl"}>
-                      {subjectsByLevelOfStudy[levelOfStudy]?.map((subject) => (
-                          <CommandItem
-                              key={subject.value}
-                              value={subject.value}
-                              onSelect={(currentValue) => {
-                                setValue(currentValue === value ? "" : currentValue);
-                                setOpen(false);
-                                setSelectedSubject(currentValue);
-                              }}
-                              className={"bg-gray-200"}
-                          >
-                            <Check
-                                className={cn(
-                                    "mr-2 h-4 w-4",
-                                    value === subject.value
-                                        ? "opacity-100"
-                                        : "opacity-0",
-                                )}
-                            />
-                            {subject.label}
-                          </CommandItem>
-                      ))}
-                    </CommandGroup>
-                  </Command>
-                </PopoverContent>
-              </Popover>
-              <UploadButton
-                  endpoint="imageUploader"
-                  onClientUploadComplete={(res) => {
-                    handleApiResponse(res);
-                  }}
-                  onUploadError={(error: Error) => {
-                    toast({
-                      title: "An error occurred.",
-                      description: "Unable to upload file.",
-                    });
-                    console.error("Error uploading file:", error);
-                  }}
-              />
-              <Button
-                  className="rounded bg-blue-500 px-4 py-5 text-white hover:bg-blue-600 focus:outline-none float-right "
-                  onClick={handleClick}
-              >
-                Save and Upload Material
-              </Button>
-            </div>
+                      )?.label || "Select subject..."
+                    : "Select subject..."}
+                  <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-[200px] border-b-black p-0">
+                <Command>
+                  <CommandInput
+                    placeholder="Search subject..."
+                    className={"rounded"}
+                  />
+                  <CommandEmpty>No subject found.</CommandEmpty>
+                  <CommandGroup className={"rounded-2xl"}>
+                    {subjectsByLevelOfStudy[levelOfStudy]?.map((subject) => (
+                      <CommandItem
+                        key={subject.value}
+                        value={subject.value}
+                        onSelect={(currentValue) => {
+                          setValue(currentValue === value ? "" : currentValue);
+                          setOpen(false);
+                          setSelectedSubject(currentValue);
+                        }}
+                        className={"bg-gray-200"}
+                      >
+                        <Check
+                          className={cn(
+                            "mr-2 h-4 w-4",
+                            value === subject.value
+                              ? "opacity-100"
+                              : "opacity-0",
+                          )}
+                        />
+                        {subject.label}
+                      </CommandItem>
+                    ))}
+                  </CommandGroup>
+                </Command>
+              </PopoverContent>
+            </Popover>
+            <UploadButton
+              endpoint="imageUploader"
+              onClientUploadComplete={(res) => {
+                handleApiResponse(res);
+              }}
+              onUploadError={(error: Error) => {
+                toast({
+                  title: "An error occurred.",
+                  description: "Unable to upload file.",
+                });
+                console.error("Error uploading file:", error);
+              }}
+            />
+            <Button
+              className="float-right rounded bg-blue-500 px-4 py-5 text-white hover:bg-blue-600 focus:outline-none "
+              onClick={handleClick}
+            >
+              Save and Upload Material
+            </Button>
+          </div>
         )}
       </main>
     </div>

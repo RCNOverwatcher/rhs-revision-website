@@ -143,11 +143,11 @@ const SubjectPage = () => {
         <h1 className="mb-4 text-3xl font-bold text-white">{label}</h1>
         <div className="grid grid-cols-1 gap-4">
           {materials.length === 0 && (
-              <div className="p-4 shadow">
-                <h3 className="mb-2 text-lg font-semibold text-white">
-                  No materials available yet
-                </h3>
-              </div>
+            <div className="p-4 shadow">
+              <h3 className="mb-2 text-lg font-semibold text-white">
+                No materials available yet
+              </h3>
+            </div>
           )}
           {materials.map((material: Material) => (
             <div key={material.title} className="bg-white p-4 shadow">

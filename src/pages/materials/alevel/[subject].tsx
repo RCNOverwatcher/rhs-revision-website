@@ -170,9 +170,9 @@ const SubjectPage = () => {
             <div className="p-4 shadow">
               <h3 className="mb-2 text-lg font-semibold text-white">
                 No materials available yet
-                </h3>
+              </h3>
             </div>
-            )}
+          )}
           {materials.map((material: Material) => (
             <div key={material.title} className="bg-white p-4 shadow">
               <h3 className="mb-2 text-lg font-semibold">{material.title}</h3>

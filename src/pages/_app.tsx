@@ -5,7 +5,7 @@ import {
   SignedIn,
   SignedOut,
   SignInButton,
-  UserButton
+  UserButton,
 } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import "@uploadthing/react/styles.css";
@@ -15,8 +15,8 @@ import { Toaster } from "~/components/toaster";
 import Image from "next/image";
 import { Button } from "~/components/button";
 import * as React from "react";
-import {GeistSans} from "geist/font/sans";
-import {cn} from "~/lib/utils";
+import { GeistSans } from "geist/font/sans";
+import { cn } from "~/lib/utils";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
@@ -79,7 +79,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
             </SignedIn>
           </div>
         </nav>
-        <hr className={"border-b-white"}/>
+        <hr className={"border-b-white"} />
         <Component {...pageProps} />
         <Toaster />
         <Analytics />

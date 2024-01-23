@@ -44,11 +44,12 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="container mx-auto py-8">
+        <h1 className="mb-4 text-4xl font-bold text-white">Revision Materials</h1>
         <div className="grid grid-cols-1 gap-4">
           {materialArray && materialArray.length > 0 ? (
             materialArray.map((material) => (
-              <div key={material.material_id} className="bg-white p-4 shadow">
-                <h3 className="mb-2 text-lg font-semibold">{material.title}</h3>
+              <div key={material.material_id} className="bg-white px-4 py-10 shadow">
+                <h3 className="mb-2 text-2xl font-semibold">{material.title}</h3>
                 <p className="mb-2 text-gray-600">{material.description}</p>
                 {material.url && (
                   <Link href={material.url} className="text-gray-600">

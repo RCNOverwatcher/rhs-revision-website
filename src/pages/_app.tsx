@@ -62,6 +62,11 @@ const MyApp: AppType = ({ Component, pageProps }) => {
                   A-Level Revision Materials
                 </Link>
               </li>
+              <li>
+                <Link className="hover:underline" href="/submit">
+                  Submit Materials
+                </Link>
+              </li>
             </ul>
           </div>
           <div className="flex space-x-4">

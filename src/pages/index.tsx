@@ -1,9 +1,4 @@
-import Link from "next/link";
-import Image from "next/image";
-import { SignInButton, SignOutButton, UserButton } from "@clerk/nextjs";
-import { useUser } from "@clerk/nextjs";
 import Head from "next/head";
-import * as React from "react";
 
 const Home = () => {
   return (

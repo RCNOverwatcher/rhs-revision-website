@@ -2,12 +2,14 @@ import Link from "next/link";
 const ALevelPage = () => {
   return (
     <div className="container mx-auto py-8">
-      <h1 className="text-3xl font-bold">A-Level Revision Resources</h1>
+      <h1 className="text-3xl font-bold text-white">
+        A-Level Revision Resources
+      </h1>
       <ul className="mt-4 space-y-2">
         <li>
           <Link
             href={`/materials/alevel/art`}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             Art
           </Link>
@@ -15,7 +17,7 @@ const ALevelPage = () => {
         <li>
           <Link
             href={`/materials/alevel/biology`}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             Biology
           </Link>
@@ -23,7 +25,7 @@ const ALevelPage = () => {
         <li>
           <Link
             href={`/materials/alevel/business`}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             Business
           </Link>
@@ -31,7 +33,7 @@ const ALevelPage = () => {
         <li>
           <Link
             href={`/materials/alevel/chemistry`}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             Chemistry
           </Link>
@@ -39,7 +41,7 @@ const ALevelPage = () => {
         <li>
           <Link
             href={`/materials/alevel/computerscience`}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             Computer Science
           </Link>
@@ -47,7 +49,7 @@ const ALevelPage = () => {
         <li>
           <Link
             href={`/materials/alevel/drama`}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             Drama
           </Link>
@@ -55,7 +57,7 @@ const ALevelPage = () => {
         <li>
           <Link
             href={`/materials/alevel/dt`}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             DT
           </Link>
@@ -63,7 +65,7 @@ const ALevelPage = () => {
         <li>
           <Link
             href={`/materials/alevel/economics`}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             Economics
           </Link>
@@ -71,7 +73,7 @@ const ALevelPage = () => {
         <li>
           <Link
             href={`/materials/alevel/english`}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             English
           </Link>
@@ -79,7 +81,7 @@ const ALevelPage = () => {
         <li>
           <Link
             href={`/materials/alevel/french`}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             French
           </Link>
@@ -87,7 +89,7 @@ const ALevelPage = () => {
         <li>
           <Link
             href={`/materials/alevel/furthermaths`}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             Further Maths
           </Link>
@@ -95,7 +97,7 @@ const ALevelPage = () => {
         <li>
           <Link
             href={`/materials/alevel/geography`}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             Geography
           </Link>
@@ -103,7 +105,7 @@ const ALevelPage = () => {
         <li>
           <Link
             href={`/materials/alevel/geology`}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             Geology
           </Link>
@@ -111,7 +113,7 @@ const ALevelPage = () => {
         <li>
           <Link
             href={`/materials/alevel/german`}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             German
           </Link>
@@ -119,7 +121,7 @@ const ALevelPage = () => {
         <li>
           <Link
             href={`/materials/alevel/history`}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             History
           </Link>
@@ -127,7 +129,7 @@ const ALevelPage = () => {
         <li>
           <Link
             href={`/materials/alevel/maths`}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             Maths
           </Link>
@@ -135,7 +137,7 @@ const ALevelPage = () => {
         <li>
           <Link
             href={`/materials/alevel/mediastudies`}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             Media Studies
           </Link>
@@ -143,7 +145,7 @@ const ALevelPage = () => {
         <li>
           <Link
             href={`/materials/alevel/music`}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             Music
           </Link>
@@ -151,7 +153,7 @@ const ALevelPage = () => {
         <li>
           <Link
             href={`/materials/alevel/pe`}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             PE
           </Link>
@@ -159,7 +161,7 @@ const ALevelPage = () => {
         <li>
           <Link
             href={`/materials/alevel/physics`}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             Physics
           </Link>
@@ -167,7 +169,7 @@ const ALevelPage = () => {
         <li>
           <Link
             href={`/materials/alevel/politics`}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             Politics
           </Link>
@@ -175,7 +177,7 @@ const ALevelPage = () => {
         <li>
           <Link
             href={`/materials/alevel/productdesign`}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             Product Design
           </Link>
@@ -183,7 +185,7 @@ const ALevelPage = () => {
         <li>
           <Link
             href={`/materials/alevel/psychology`}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             Psychology
           </Link>
@@ -191,7 +193,7 @@ const ALevelPage = () => {
         <li>
           <Link
             href={`/materials/alevel/re`}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             RE
           </Link>

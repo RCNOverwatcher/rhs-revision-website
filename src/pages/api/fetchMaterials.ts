@@ -8,7 +8,7 @@ export default async function handler(
 ) {
   if (req.method === "GET") {
     try {
-      const materials:materials[] = await prisma.materials.findMany();
+      const materials: materials[] = await prisma.materials.findMany();
       res.status(200).json(materials);
     } catch (error) {
       console.error("Error fetching materials:", error);

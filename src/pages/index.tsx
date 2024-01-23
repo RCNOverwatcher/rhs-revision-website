@@ -1,16 +1,9 @@
 import Link from "next/link";
-import { SignInButton, SignOutButton } from "@clerk/nextjs";
+import Image from "next/image";
+import { SignInButton, SignOutButton, UserButton } from "@clerk/nextjs";
 import { useUser } from "@clerk/nextjs";
 import Head from "next/head";
 import * as React from "react";
-function UserStatus() {
-  const { isSignedIn } = useUser();
-
-  if (isSignedIn) {
-    return <SignOutButton>Sign out</SignOutButton>;
-  }
-  return <SignInButton>Sign in</SignInButton>;
-}
 
 const Home = () => {
   return (
@@ -24,20 +17,13 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="flex h-screen items-center justify-center bg-gray-200">
-        <div className="rounded-lg bg-white p-8 shadow-md">
-          <h1 className="mb-4 text-3xl font-bold">
-            Welcome to the RHS Revision Portal!
-          </h1>
-          <p className="mb-8 text-lg text-gray-700">
-            Start revising and ace your exams!
-          </p>
-          <div className="flex justify-between">
-            <UserStatus />
-            <button className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600">
-              <Link href={"/materials"}>View Materials</Link>
-            </button>
-          </div>
+      <div className="bg-[#0c1c47]">
+        <div className="py-16 text-center">
+          <h1 className="mb-4 text-4xl font-bold text-white">WELCOME TO THE</h1>
+          <h2 className="text-6xl font-bold text-[#ffc423]">
+            RICHARD HALE SCHOOL
+          </h2>
+          <p className="mt-4 text-lg text-white">REVISION PLATFORM</p>
         </div>
       </div>
     </main>

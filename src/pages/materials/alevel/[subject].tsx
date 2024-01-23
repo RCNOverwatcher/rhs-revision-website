@@ -164,7 +164,7 @@ const SubjectPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="container mx-auto py-8">
-        <h1 className="mb-4 text-3xl font-bold">{label}</h1>
+        <h1 className="mb-4 text-3xl font-bold text-white">{label}</h1>
         <div className="grid grid-cols-1 gap-4">
           {materials.map((material: Material) => (
             <div key={material.title} className="bg-white p-4 shadow">

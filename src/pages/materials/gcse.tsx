@@ -3,12 +3,12 @@ import Link from "next/link";
 const GCSEPage = () => {
   return (
     <div className="container mx-auto py-8">
-      <h1 className="text-3xl font-bold">GCSE Revision Resources</h1>
+      <h1 className="text-3xl font-bold text-white">GCSE Revision Resources</h1>
       <ul className="mt-4 space-y-2">
         <li>
           <Link
             href={"/materials/gcse/art"}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             Art
           </Link>
@@ -16,7 +16,7 @@ const GCSEPage = () => {
         <li>
           <Link
             href={"/materials/gcse/biology"}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             Biology
           </Link>
@@ -24,7 +24,7 @@ const GCSEPage = () => {
         <li>
           <Link
             href={"/materials/gcse/business"}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             Business
           </Link>
@@ -32,7 +32,7 @@ const GCSEPage = () => {
         <li>
           <Link
             href={"/materials/gcse/chemistry"}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             Chemistry
           </Link>
@@ -40,7 +40,7 @@ const GCSEPage = () => {
         <li>
           <Link
             href={"/materials/gcse/computerscience"}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             Computer Science
           </Link>
@@ -48,7 +48,7 @@ const GCSEPage = () => {
         <li>
           <Link
             href={"/materials/gcse/drama"}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             Drama
           </Link>
@@ -56,7 +56,7 @@ const GCSEPage = () => {
         <li>
           <Link
             href={"/materials/gcse/dt"}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             DT
           </Link>
@@ -64,7 +64,7 @@ const GCSEPage = () => {
         <li>
           <Link
             href={"/materials/gcse/engineering"}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             Engineering
           </Link>
@@ -72,7 +72,7 @@ const GCSEPage = () => {
         <li>
           <Link
             href={"/materials/gcse/english"}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             English
           </Link>
@@ -80,7 +80,7 @@ const GCSEPage = () => {
         <li>
           <Link
             href={"/materials/gcse/foodTechnology"}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             Food Technology
           </Link>
@@ -88,7 +88,7 @@ const GCSEPage = () => {
         <li>
           <Link
             href={"/materials/gcse/french"}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             French
           </Link>
@@ -96,7 +96,7 @@ const GCSEPage = () => {
         <li>
           <Link
             href={"/materials/gcse/geography"}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             Geography
           </Link>
@@ -104,7 +104,7 @@ const GCSEPage = () => {
         <li>
           <Link
             href={"/materials/gcse/geology"}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             Geology
           </Link>
@@ -112,7 +112,7 @@ const GCSEPage = () => {
         <li>
           <Link
             href={"/materials/gcse/german"}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             German
           </Link>
@@ -120,7 +120,7 @@ const GCSEPage = () => {
         <li>
           <Link
             href={"/materials/gcse/general"}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             General
           </Link>
@@ -128,7 +128,7 @@ const GCSEPage = () => {
         <li>
           <Link
             href={"/materials/gcse/history"}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             History
           </Link>
@@ -136,7 +136,7 @@ const GCSEPage = () => {
         <li>
           <Link
             href={"/materials/gcse/maths"}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             Maths
           </Link>
@@ -144,7 +144,7 @@ const GCSEPage = () => {
         <li>
           <Link
             href={"/materials/gcse/music"}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             Music
           </Link>
@@ -152,7 +152,7 @@ const GCSEPage = () => {
         <li>
           <Link
             href={"/materials/gcse/pe"}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             PE
           </Link>
@@ -160,7 +160,7 @@ const GCSEPage = () => {
         <li>
           <Link
             href={"/materials/gcse/physics"}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             Physics
           </Link>
@@ -168,7 +168,7 @@ const GCSEPage = () => {
         <li>
           <Link
             href={"/materials/gcse/re"}
-            className={"text-blue-500 hover:underline"}
+            className={"text-yellow-500 hover:underline"}
           >
             RE
           </Link>

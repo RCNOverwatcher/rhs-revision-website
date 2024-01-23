@@ -11,7 +11,7 @@ const auth = (_req: NextApiRequest, _res: NextApiResponse) => ({
 // FileRouter for your app, can contain multiple FileRoutes
 export const ourFileRouter = {
   // Define as many FileRoutes as you like, each with a unique routeSlug
-  imageUploader: f({ blob: { maxFileSize: "4MB", maxFileCount: 1 } })
+  imageUploader: f({ blob: { maxFileSize: "128MB", maxFileCount: 1 } })
     // Set permissions and file types for this FileRoute
     .middleware(async ({ req, res }) => {
       // This code runs on your server before upload

@@ -126,10 +126,9 @@ const subjects = [
 ];
 
 const SubjectPage = () => {
-  const router = useRouter();
   const {user} = useUser();
 
-  const { subject } = router.query;
+  const { subject } = useRouter().query;
   const [materials, setMaterials] = useState<Material[]>([]);
 
   function getLabelByValue(value: string): string | undefined {
@@ -141,6 +140,9 @@ const SubjectPage = () => {
   useEffect(() => {
     const fetchMaterials = async () => {
       try {
+        if (subject === undefined) {
+          return;
+        }
         const data = await fetch(
           `/api/fetchMaterialsBySubject_alevel?subject=${subject as string}`,
         );

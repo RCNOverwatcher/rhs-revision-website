@@ -32,7 +32,7 @@ const subjects = [
     label: "Chemistry",
   },
   {
-    value: "computerScience",
+    value: "computer_science",
     label: "Computer Science",
   },
   {
@@ -52,7 +52,7 @@ const subjects = [
     label: "English",
   },
   {
-    value: "foodTechnology",
+    value: "food_technology",
     label: "Food Technology",
   },
   {

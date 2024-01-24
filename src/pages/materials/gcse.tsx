@@ -39,7 +39,7 @@ const GCSEPage = () => {
         </li>
         <li>
           <Link
-            href={"/materials/gcse/computerscience"}
+            href={"/materials/gcse/computer_science"}
             className={"text-yellow-500 hover:underline"}
           >
             Computer Science
@@ -79,7 +79,7 @@ const GCSEPage = () => {
         </li>
         <li>
           <Link
-            href={"/materials/gcse/foodTechnology"}
+            href={"/materials/gcse/food_technology"}
             className={"text-yellow-500 hover:underline"}
           >
             Food Technology

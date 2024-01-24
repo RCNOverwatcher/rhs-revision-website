@@ -40,7 +40,7 @@ const ALevelPage = () => {
         </li>
         <li>
           <Link
-            href={`/materials/alevel/computerscience`}
+            href={`/materials/alevel/computer_science`}
             className={"text-yellow-500 hover:underline"}
           >
             Computer Science
@@ -88,7 +88,7 @@ const ALevelPage = () => {
         </li>
         <li>
           <Link
-            href={`/materials/alevel/furthermaths`}
+            href={`/materials/alevel/further_maths`}
             className={"text-yellow-500 hover:underline"}
           >
             Further Maths
@@ -136,7 +136,7 @@ const ALevelPage = () => {
         </li>
         <li>
           <Link
-            href={`/materials/alevel/mediastudies`}
+            href={`/materials/alevel/media_studies`}
             className={"text-yellow-500 hover:underline"}
           >
             Media Studies
@@ -176,7 +176,7 @@ const ALevelPage = () => {
         </li>
         <li>
           <Link
-            href={`/materials/alevel/productdesign`}
+            href={`/materials/alevel/product_design`}
             className={"text-yellow-500 hover:underline"}
           >
             Product Design

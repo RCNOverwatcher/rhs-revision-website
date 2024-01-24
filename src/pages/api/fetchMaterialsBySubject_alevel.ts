@@ -7,7 +7,6 @@ export default async function handler(
 ) {
   if (req.method === "GET") {
     const { subject } = req.query;
-
     try {
       const materials = await prisma.materials.findMany({
         where: {

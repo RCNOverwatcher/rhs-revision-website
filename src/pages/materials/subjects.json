@@ -17,7 +17,7 @@
       "label": "English"
     },
     {
-      "value": "computerScience",
+      "value": "computer_science",
       "label": "Computer Science"
     },
     {
@@ -67,7 +67,7 @@
       "label": "Chemistry"
     },
     {
-      "value": "computerScience",
+      "value": "computer_science",
       "label": "Computer Science"
     },
     {
@@ -87,7 +87,7 @@
       "label": "English"
     },
     {
-      "value": "foodTechnology",
+      "value": "food_technology",
       "label": "Food Technology"
     },
     {
@@ -157,7 +157,7 @@
       "label": "Chemistry"
     },
     {
-      "value": "computerScience",
+      "value": "computer_science",
       "label": "Computer Science"
     },
     {
@@ -177,7 +177,7 @@
       "label": "French"
     },
     {
-      "value": "furtherMaths",
+      "value": "further_maths",
       "label": "Further Maths"
     },
     {
@@ -201,7 +201,7 @@
       "label": "Maths"
     },
     {
-      "value": "mediaStudies",
+      "value": "media_studies",
       "label": "Media Studies"
     },
     {
@@ -221,7 +221,7 @@
       "label": "Politics"
     },
     {
-      "value": "productDesign",
+      "value": "product_design",
       "label": "Product Design"
     },
     {
@@ -233,15 +233,15 @@
       "label": "RE"
     },
     {
-      "value": "btecSportStudies",
+      "value": "btec_sport",
       "label": "BTEC Sport Studies"
     },
     {
-      "value": "btecBusinessStudies",
+      "value": "btec_business",
       "label": "BTEC Business Studies"
     },
     {
-      "value": "btecScience",
+      "value": "btec_science",
       "label": "BTEC Science"
     }
   ]

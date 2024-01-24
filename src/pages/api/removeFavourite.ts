@@ -8,7 +8,6 @@ export default async function handler(
 ) {
   if (req.method === "GET") {
     try {
-
       const { userID, favourite } = req.query;
 
       const fav_num = parseInt(favourite as string, 10);

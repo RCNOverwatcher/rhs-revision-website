@@ -9,6 +9,7 @@ datasource db {
 }
 
 model materials {
+  materialID     Int      @default(autoincrement())
   title          String   @id @db.VarChar(255)
   description    String?  @db.VarChar(255)
   subject        String   @db.VarChar(255)
@@ -17,4 +18,13 @@ model materials {
   file_url       String?  @db.VarChar(255)
   url            String?  @db.VarChar(255)
   date_uploaded  DateTime
+}
+
+model users {
+  userID     String  @id @db.VarChar(255)
+  first_name String  @db.VarChar(255)
+  last_name  String  @db.VarChar(255)
+  email      String  @db.VarChar(255)
+  is_teacher Boolean @default(false)
+  favourites Int[]
 }

@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
-import * as React from "react";
+import { Toggle } from "~/components/ui/toggle";
+import { useUser } from "@clerk/nextjs";
 
 interface MaterialData {
-  material_id: number;
+  materialID: number;
   title: string;
   description: string;
   url: string;
@@ -13,6 +14,8 @@ interface MaterialData {
 }
 
 const Home = () => {
+  const { user } = useUser();
+
   const [materialArray, setMaterialArray] = useState<MaterialData[]>([]);
 
   useEffect(() => {
@@ -51,9 +54,51 @@ const Home = () => {
           {materialArray && materialArray.length > 0 ? (
             materialArray.map((material) => (
               <div
-                key={material.material_id}
+                key={material.materialID}
                 className="bg-white px-4 py-10 shadow"
               >
+                <Toggle
+                  aria-label="Toggle favorite"
+                  variant="outline"
+                  className={"float-right"}
+                  onPressedChange={(pressed) => {
+                    if (pressed) {
+                      fetch(`/api/addFavorite`, {
+                        body: JSON.stringify({
+                          userID: user?.id,
+                          materialID: material.materialID,
+                        }),
+                      }).catch((error) => {
+                        console.error("Error adding favorite:", error);
+                      });
+                    } else if (!pressed) {
+                      fetch(`/api/removeFavorite`, {
+                        body: JSON.stringify({
+                          userID: user?.id,
+                          materialID: material.materialID,
+                        }),
+                      }).catch((error) => {
+                        console.error("Error removing favorite:", error);
+                      });
+                    }
+                  }}
+                >
+                  <svg
+                    className={"h-4 w-4"}
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="#d4af37"
+                    stroke="#d4af37"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                  <span className="sr-only">Toggle favorite</span>
+                </Toggle>
                 <h3 className="mb-2 text-2xl font-semibold">
                   {material.title}
                 </h3>

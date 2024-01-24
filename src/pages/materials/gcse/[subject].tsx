@@ -5,6 +5,7 @@ import Head from "next/head";
 import * as React from "react";
 import {Toggle} from "~/components/ui/toggle";
 import {useUser} from "@clerk/nextjs";
+import {useToast} from "~/components/use-toast";
 
 interface Material {
   materialID: number;
@@ -102,10 +103,10 @@ const subjects = [
 ];
 
 const SubjectPage = () => {
-  const router = useRouter();
   const {user} = useUser();
+  const { toast } = useToast();
 
-  const { subject } = router.query;
+  const { subject } = useRouter().query;
   const [materials, setMaterials] = useState<Material[]>([]);
 
   function getLabelByValue(value: string): string | undefined {
@@ -126,6 +127,11 @@ const SubjectPage = () => {
         setMaterials(material);
       } catch (error) {
         console.error("Error fetching materials:", error);
+        toast({
+            title: "Error fetching materials",
+            description: "An unknown error occurred while fetching materials. Please try again later.",
+          className: "bg-red-500",
+        })
       }
     };
 

@@ -8,6 +8,7 @@ export default authMiddleware({
     "/api/fetchMaterialsBySubject",
     "/api/fetchMaterialsBySubject_alevel",
     "/api/fetchMaterialsBySubject_gcse",
+    "/api/createUser",
   ],
 });
 

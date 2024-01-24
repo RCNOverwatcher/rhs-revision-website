@@ -64,6 +64,7 @@ const Home = () => {
                   onPressedChange={(pressed) => {
                     if (pressed) {
                       fetch(`/api/addFavorite`, {
+                        method: "POST",
                         body: JSON.stringify({
                           userID: user?.id,
                           materialID: material.materialID,
@@ -73,6 +74,7 @@ const Home = () => {
                       });
                     } else if (!pressed) {
                       fetch(`/api/removeFavorite`, {
+                        method: "POST",
                         body: JSON.stringify({
                           userID: user?.id,
                           materialID: material.materialID,

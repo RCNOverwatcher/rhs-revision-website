@@ -1,21 +1,21 @@
 import { type NextApiRequest, type NextApiResponse } from "next";
 import prisma from "~/lib/prisma";
 
-type Data = {
-  userID: string;
-  favourite: number;
-};
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  if (req.method === "POST") {
+  if (req.method === "GET") {
     try {
-      const requestBody: Data = req.body as Data;
+
+      const { userID, favourite } = req.query;
+
+      const fav_num = parseInt(favourite as string, 10);
+
       const currentFavourites = await prisma.users.findUnique({
         where: {
-          userID: requestBody.userID,
+          userID: userID as string,
         },
       });
       if (!currentFavourites) {
@@ -23,11 +23,11 @@ export default async function handler(
         return;
       }
       const newFavourites = currentFavourites.favourites.filter(
-        (item) => item !== requestBody.favourite,
+        (item) => item !== fav_num,
       );
       await prisma.users.update({
         where: {
-          userID: requestBody.userID,
+          userID: userID as string,
         },
         data: {
           favourites: newFavourites,

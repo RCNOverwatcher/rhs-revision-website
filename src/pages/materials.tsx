@@ -63,22 +63,12 @@ const Home = () => {
                   className={"float-right"}
                   onPressedChange={(pressed) => {
                     if (pressed) {
-                      fetch(`/api/addFavourite`, {
-                        method: "POST",
-                        body: JSON.stringify({
-                          userID: user?.id,
-                          materialID: material.materialID,
-                        }),
+                      fetch(`/api/addFavourite?user_id=${user?.id}?favourite=${material.materialID}`, {
                       }).catch((error) => {
                         console.error("Error adding favorite:", error);
                       });
                     } else if (!pressed) {
-                      fetch(`/api/removeFavourite`, {
-                        method: "POST",
-                        body: JSON.stringify({
-                          userID: user?.id,
-                          materialID: material.materialID,
-                        }),
+                      fetch(`/api/removeFavourite?user_id=${user?.id}?favourite=${material.materialID}`, {
                       }).catch((error) => {
                         console.error("Error removing favourite:", error);
                       });

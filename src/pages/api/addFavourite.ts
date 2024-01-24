@@ -1,7 +1,6 @@
 import { type NextApiRequest, type NextApiResponse } from "next";
 import prisma from "~/lib/prisma";
 
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
@@ -22,7 +21,8 @@ export default async function handler(
         },
       });
       res.status(201).json({
-        message: "User Favourites updated successfully for user: " + updateUser.userID,
+        message:
+          "User Favourites updated successfully for user: " + updateUser.userID,
       });
     } catch (error) {
       console.error("Error inserting new favourite:", error);

@@ -17,7 +17,7 @@ const Home = () => {
   const { user } = useUser();
 
   const [materialArray, setMaterialArray] = useState<MaterialData[]>([]);
-
+  const [favoriteMaterials, setFavoriteMaterials] = useState<number[]>([]);
   useEffect(() => {
     const fetchMaterials = async () => {
       try {
@@ -34,7 +34,27 @@ const Home = () => {
     fetchMaterials().catch((error) => {
       console.error("Error fetching materials:", error);
     });
-  }, []);
+
+    const fetchFavorites = async () => {
+      try {
+        const data = await fetch(`/api/fetchFavourites?userID=${user?.id}`);
+        const favorites = await data.json() as number[];
+        setFavoriteMaterials(favorites);
+      } catch (error) {
+        console.error("Error fetching favorites:", error);
+      }
+    };
+
+    if (user?.id) {
+      fetchFavorites().catch((error) => {
+        console.error("Error fetching favorites:", error);
+      });
+    }
+  }, [user?.id]);
+
+  const isMaterialFavourited = (materialID: number) => {
+    return favoriteMaterials.includes(materialID);
+  };
 
   return (
     <main>
@@ -58,22 +78,34 @@ const Home = () => {
                 className="bg-white px-4 py-10 shadow"
               >
                 <Toggle
-                  aria-label="Toggle favorite"
-                  variant="outline"
-                  className={"float-right"}
-                  onPressedChange={(pressed) => {
-                    if (pressed) {
-                      fetch(`/api/addFavourite?userID=${user?.id}&favourite=${material.materialID as unknown as string}`, {
-                      }).catch((error) => {
-                        console.error("Error adding favorite:", error);
-                      });
-                    } else if (!pressed) {
-                      fetch(`/api/removeFavourite?userID=${user?.id}&favourite=${material.materialID}`, {
-                      }).catch((error) => {
-                        console.error("Error removing favourite:", error);
-                      });
-                    }
-                  }}
+                    aria-label="Toggle favorite"
+                    variant="outline"
+                    className={"float-right"}
+                    pressed={isMaterialFavourited(material.materialID)}
+                    onPressedChange={(pressed) => {
+                      const favoritesCopy = [...favoriteMaterials];
+                      if (pressed) {
+                        favoritesCopy.push(material.materialID);
+                        setFavoriteMaterials(favoritesCopy);
+
+                        fetch(`/api/addFavourite?userID=${user?.id}&favourite=${material.materialID}`)
+                            .catch((error) => {
+                              console.error("Error adding favorite:", error);
+                            });
+                      } else {
+                        const index = favoritesCopy.indexOf(material.materialID);
+                        if (index !== -1) {
+                          favoritesCopy.splice(index, 1);
+                          setFavoriteMaterials(favoritesCopy);
+
+
+                          fetch(`/api/removeFavourite?userID=${user?.id}&favourite=${material.materialID}`)
+                              .catch((error) => {
+                                console.error("Error removing favorite:", error);
+                              });
+                        }
+                      }
+                    }}
                 >
                   <svg
                     className={"h-4 w-4"}

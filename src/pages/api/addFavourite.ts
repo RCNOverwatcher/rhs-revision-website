@@ -13,18 +13,18 @@ export default async function handler(
   if (req.method === "POST") {
     try {
       const requestBody: Data = req.body as Data;
-      await prisma.users.update({
+      const updateUser = await prisma.users.update({
         where: {
           userID: requestBody.userID,
         },
         data: {
           favourites: {
-            push: requestBody.favourite,
+            push: [requestBody.favourite],
           },
         },
       });
       res.status(201).json({
-        message: "User Favourites updated successfully",
+        message: "User Favourites updated successfully for user: " + updateUser.userID,
       });
     } catch (error) {
       console.error("Error inserting new favourite:", error);

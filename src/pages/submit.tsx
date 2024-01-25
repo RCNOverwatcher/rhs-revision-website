@@ -17,10 +17,10 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from "~/components/popover";
 import { useToast } from "~/components/use-toast";
 
-type Subject = {
+interface Subject {
   value: string;
   label: string;
-};
+}
 
 const subjectsByLevelOfStudy: Record<string, Subject[]> = {
   All: [

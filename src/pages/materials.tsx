@@ -38,7 +38,7 @@ const Home = () => {
     const fetchFavorites = async () => {
       try {
         const data = await fetch(`/api/fetchFavourites?userID=${user?.id}`);
-        const favorites = await data.json() as number[];
+        const favorites = (await data.json()) as number[];
         setFavoriteMaterials(favorites);
       } catch (error) {
         console.error("Error fetching favorites:", error);
@@ -71,41 +71,43 @@ const Home = () => {
           Revision Materials
         </h1>
         <div className="grid grid-cols-1 gap-4">
-          {materialArray && materialArray.length > 0 && (
+          {materialArray &&
+            materialArray.length > 0 &&
             materialArray.map((material) => (
               <div
                 key={material.materialID}
                 className="bg-white px-4 py-10 shadow"
               >
                 <Toggle
-                    aria-label="Toggle favorite"
-                    variant="outline"
-                    className={"float-right"}
-                    pressed={isMaterialFavourited(material.materialID)}
-                    onPressedChange={(pressed) => {
-                      const favoritesCopy = [...favoriteMaterials];
-                      if (pressed) {
-                        favoritesCopy.push(material.materialID);
+                  aria-label="Toggle favorite"
+                  variant="outline"
+                  className={"float-right"}
+                  pressed={isMaterialFavourited(material.materialID)}
+                  onPressedChange={(pressed) => {
+                    const favoritesCopy = [...favoriteMaterials];
+                    if (pressed) {
+                      favoritesCopy.push(material.materialID);
+                      setFavoriteMaterials(favoritesCopy);
+
+                      fetch(
+                        `/api/addFavourite?userID=${user?.id}&favourite=${material.materialID}`,
+                      ).catch((error) => {
+                        console.error("Error adding favorite:", error);
+                      });
+                    } else {
+                      const index = favoritesCopy.indexOf(material.materialID);
+                      if (index !== -1) {
+                        favoritesCopy.splice(index, 1);
                         setFavoriteMaterials(favoritesCopy);
 
-                        fetch(`/api/addFavourite?userID=${user?.id}&favourite=${material.materialID}`)
-                            .catch((error) => {
-                              console.error("Error adding favorite:", error);
-                            });
-                      } else {
-                        const index = favoritesCopy.indexOf(material.materialID);
-                        if (index !== -1) {
-                          favoritesCopy.splice(index, 1);
-                          setFavoriteMaterials(favoritesCopy);
-
-
-                          fetch(`/api/removeFavourite?userID=${user?.id}&favourite=${material.materialID}`)
-                              .catch((error) => {
-                                console.error("Error removing favorite:", error);
-                              });
-                        }
+                        fetch(
+                          `/api/removeFavourite?userID=${user?.id}&favourite=${material.materialID}`,
+                        ).catch((error) => {
+                          console.error("Error removing favorite:", error);
+                        });
                       }
-                    }}
+                    }
+                  }}
                 >
                   <svg
                     className={"h-4 w-4"}
@@ -138,8 +140,7 @@ const Home = () => {
                   </button>
                 )}
               </div>
-            ))
-          )}
+            ))}
         </div>
       </div>
     </main>

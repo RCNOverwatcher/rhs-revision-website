@@ -1,6 +1,6 @@
 import { type NextApiRequest, type NextApiResponse } from "next";
 import prisma from "~/lib/prisma";
-type Data = {
+interface Data {
   data: {
     id: string;
     first_name: string;
@@ -9,7 +9,7 @@ type Data = {
       email_address: string;
     }[];
   };
-};
+}
 
 export default async function handler(
   req: NextApiRequest,

@@ -9,6 +9,7 @@ export default authMiddleware({
     "/api/fetchMaterialsBySubject_alevel",
     "/api/fetchMaterialsBySubject_gcse",
     "/api/createUser",
+    "/api/fetchExams",
   ],
 });
 

@@ -71,7 +71,7 @@ const Home = () => {
           Revision Materials
         </h1>
         <div className="grid grid-cols-1 gap-4">
-          {materialArray && materialArray.length > 0 ? (
+          {materialArray && materialArray.length > 0 && (
             materialArray.map((material) => (
               <div
                 key={material.materialID}
@@ -139,8 +139,6 @@ const Home = () => {
                 )}
               </div>
             ))
-          ) : (
-            <></>
           )}
         </div>
       </div>

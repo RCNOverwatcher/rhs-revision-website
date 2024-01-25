@@ -28,3 +28,13 @@ model users {
   is_teacher Boolean @default(false)
   favourites Int[]
 }
+
+model exams {
+  exam_id       Int      @id @default(autoincrement())
+  exam_title    String   @db.VarChar(255)
+  exam_date     DateTime
+  exam_time     String   @db.VarChar(255)
+  exam_duration String   @db.VarChar(255)
+  exam_subject  String   @db.VarChar(255)
+  exam_level    String   @db.VarChar(255)
+}

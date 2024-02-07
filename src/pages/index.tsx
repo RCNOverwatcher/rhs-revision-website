@@ -1,5 +1,5 @@
 import Head from "next/head";
-import type {GetStaticProps} from "next";
+import type { GetStaticProps } from "next";
 import Countdown from "react-countdown";
 
 interface Exams {
@@ -17,7 +17,6 @@ interface PageProps {
 }
 
 function Home({ exams }: PageProps) {
-
   return (
     <main>
       <Head>
@@ -36,18 +35,23 @@ function Home({ exams }: PageProps) {
             RICHARD HALE SCHOOL
           </h2>
           <p className="mt-4 text-lg text-white">REVISION PLATFORM</p>
-            {exams.length > 0 &&
-                exams.map((exam: Exams) => (
-                    <div key={exam.exam_id} className="bg-white p-4 shadow">
-                        <h3 className="mb-2 text-lg font-semibold text-white">
-                            {exam.exam_title}
-                        </h3>
-                        <p className="text-sm text-gray-500">
-                            <Countdown date={exam.exam_date} />,{exam.exam_time}{" "}
-                            {exam.exam_duration} {exam.exam_subject} {exam.exam_level}
-                        </p>
-                    </div>
-                ))}
+          {exams.length > 0 &&
+            exams.map((exam: Exams) => (
+              <div
+                key={exam.exam_id}
+                className={"flex grid-cols-3 justify-center p-5"}
+              >
+                <div className="p-4 shadow">
+                  <h3 className="mb-2 text-lg font-semibold text-white">
+                    {exam.exam_title}
+                  </h3>
+                  <p className="text-sm text-gray-500">
+                    <Countdown date={exam.exam_date} />, {exam.exam_time}{" "}
+                    {exam.exam_duration} {exam.exam_subject} {exam.exam_level}
+                  </p>
+                </div>
+              </div>
+            ))}
         </div>
       </div>
     </main>

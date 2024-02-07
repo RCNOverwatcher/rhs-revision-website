@@ -35,23 +35,25 @@ function Home({ exams }: PageProps) {
             RICHARD HALE SCHOOL
           </h2>
           <p className="mt-4 text-lg text-white">REVISION PLATFORM</p>
+          <div className={"container mx-auto"}>
+            <div className={"grid grid-cols-1 sm:grid-cols-3 gap-4"}>
           {exams.length > 0 &&
             exams.map((exam: Exams) => (
               <div
                 key={exam.exam_id}
-                className={"flex grid-cols-3 justify-center p-5"}
+                className={"relative flex h-full flex-col rounded-md border border-gray-200 bg-white p-2.5 hover:border-gray-400 sm:rounded-lg sm:p-5"}
               >
-                <div className="p-4 shadow">
-                  <h3 className="mb-2 text-lg font-semibold text-white">
+                  <h3 className="text-md mb-0 font-semibold text-gray-900 hover:text-black sm:mb-1.5 sm:text-xl">
                     {exam.exam_title}
                   </h3>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm leading-normal text-gray-400 sm:block">
                     <Countdown date={exam.exam_date} />, {exam.exam_time}{" "}
                     {exam.exam_duration} {exam.exam_subject} {exam.exam_level}
                   </p>
-                </div>
               </div>
             ))}
+          </div>
+          </div>
         </div>
       </div>
     </main>
@@ -60,8 +62,7 @@ function Home({ exams }: PageProps) {
 
 export const getStaticProps: GetStaticProps = async (_context) => {
   const res = await fetch("https://revision.rcn.sh/api/fetchExams");
-  const exams = (await res.json()) as Exams;
-  console.log(exams);
+  const exams = (await res.json()) as Exams[];
 
   return {
     props: {

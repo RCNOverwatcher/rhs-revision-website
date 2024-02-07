@@ -35,7 +35,7 @@ function Home({ exams }: PageProps) {
             RICHARD HALE SCHOOL
           </h2>
           <p className="mt-4 text-lg text-white">REVISION PLATFORM</p>
-          <div className={"container mx-auto"}>
+          <div className={"container mx-auto my-10"}>
             <div className={"grid grid-cols-1 gap-4 sm:grid-cols-3"}>
               {exams.length > 0 &&
                 exams.map((exam: Exams) => (

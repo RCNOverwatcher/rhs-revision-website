@@ -37,4 +37,5 @@ model exams {
   exam_duration String   @db.VarChar(255)
   exam_subject  String   @db.VarChar(255)
   exam_level    String   @db.VarChar(255)
+  exam_board    String   @db.VarChar(255)
 }

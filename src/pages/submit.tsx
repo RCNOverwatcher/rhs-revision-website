@@ -301,6 +301,7 @@ const Submit = () => {
               </PopoverContent>
             </Popover>
             <UploadButton
+              appearance={{ allowedContent: "text-white" }}
               endpoint="imageUploader"
               onClientUploadComplete={(res) => {
                 handleApiResponse(res);

@@ -1,19 +1,11 @@
 import Head from "next/head";
 import type { GetStaticProps } from "next";
 import Countdown from "react-countdown";
-
-interface Exams {
-  exam_id: number;
-  exam_title: string;
-  exam_date: Date;
-  exam_time: string;
-  exam_duration: number;
-  exam_subject: string;
-  exam_level: string;
-}
+import prisma from "~/lib/prisma";
+import type { exams } from "@prisma/client";
 
 interface PageProps {
-  exams: Exams[];
+  exams: exams[];
 }
 
 function Home({ exams }: PageProps) {
@@ -38,7 +30,7 @@ function Home({ exams }: PageProps) {
           <div className={"container mx-auto my-10"}>
             <div className={"grid grid-cols-1 gap-4 sm:grid-cols-3"}>
               {exams.length > 0 &&
-                exams.map((exam: Exams) => (
+                exams.map((exam: exams) => (
                   <div
                     key={exam.exam_id}
                     className={
@@ -63,8 +55,7 @@ function Home({ exams }: PageProps) {
 }
 
 export const getStaticProps: GetStaticProps = async (_context) => {
-  const res = await fetch("https://revision.rcn.sh/api/fetchExams");
-  const exams = (await res.json()) as Exams[];
+  const exams: exams[] = await prisma.exams.findMany();
   exams.sort((a, b) => {
     if (a.exam_date < b.exam_date) {
       return -1;

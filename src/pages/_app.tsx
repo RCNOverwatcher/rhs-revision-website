@@ -14,7 +14,6 @@ import { Analytics } from "@vercel/analytics/react";
 import { Toaster } from "~/components/toaster";
 import Image from "next/image";
 import { Button } from "~/components/button";
-import * as React from "react";
 import { GeistSans } from "geist/font/sans";
 import { cn } from "~/lib/utils";
 

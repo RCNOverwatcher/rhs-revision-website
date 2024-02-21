@@ -3,12 +3,18 @@ import type { GetStaticProps } from "next";
 import Countdown from "react-countdown";
 import prisma from "~/lib/prisma";
 import type { exams } from "@prisma/client";
+import { useEffect, useState } from "react";
 
 interface PageProps {
   exams: exams[];
 }
 
 function Home({ exams }: PageProps) {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
   return (
     <main>
       <Head>
@@ -41,8 +47,9 @@ function Home({ exams }: PageProps) {
                       {exam.exam_title}
                     </h3>
                     <p className="text-sm leading-normal text-gray-400 sm:block">
-                      <Countdown date={exam.exam_date} />, {exam.exam_time}{" "}
-                      {exam.exam_duration} {exam.exam_subject} {exam.exam_level}
+                      {isMounted && <Countdown date={exam.exam_date} />},{" "}
+                      {exam.exam_time} {exam.exam_duration} {exam.exam_subject}{" "}
+                      {exam.exam_level}
                     </p>
                   </div>
                 ))}

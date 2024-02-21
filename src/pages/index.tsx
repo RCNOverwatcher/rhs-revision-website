@@ -66,9 +66,16 @@ export const getStaticProps: GetStaticProps = async (_context) => {
     return 0;
   });
 
+  const formattedExams = exams.map((exam) => {
+    return {
+      ...exam,
+      exam_date: new Date(exam.exam_date).toISOString(),
+    };
+  });
+
   return {
     props: {
-      exams,
+      exams: formattedExams,
     },
     revalidate: 3600,
   };

@@ -1,13 +1,11 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
 import { Toggle } from "~/components/ui/toggle";
 import { useUser } from "@clerk/nextjs";
 import { useToast } from "~/components/use-toast";
 import type { materials } from "@prisma/client";
-import { GetServerSideProps } from "next";
-import { getAuth } from "@clerk/nextjs/server";
+import { type GetServerSideProps } from "next";
 import prisma from "~/lib/prisma";
 
 const subjects = [
@@ -224,12 +222,13 @@ function SubjectPage({ materials }: { materials: materials[] }) {
   );
 }
 
-export const getServersideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const subject = context.params?.subject;
 
   const materials: materials[] = await prisma.materials.findMany({
     where: {
       subject: subject as string,
+      level_of_study: "A-Level",
     },
   });
 

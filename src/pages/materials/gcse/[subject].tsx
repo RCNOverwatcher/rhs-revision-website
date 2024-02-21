@@ -1,19 +1,12 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
-import * as React from "react";
 import { Toggle } from "~/components/ui/toggle";
 import { useUser } from "@clerk/nextjs";
 import { useToast } from "~/components/use-toast";
-
-interface Material {
-  materialID: number;
-  title: string;
-  description: string;
-  url: string;
-  fileUrl: string;
-}
+import type { materials } from "@prisma/client";
+import { type GetServerSideProps } from "next";
+import prisma from "~/lib/prisma";
 
 const subjects = [
   {
@@ -102,44 +95,17 @@ const subjects = [
   },
 ];
 
-const SubjectPage = () => {
+function SubjectPage({ materials }: { materials: materials[] }) {
   const { user } = useUser();
-  const { toast } = useToast();
-
   const { subject } = useRouter().query;
-  const [materials, setMaterials] = useState<Material[]>([]);
+  const { toast } = useToast();
 
   function getLabelByValue(value: string): string | undefined {
     const subject = subjects.find((subject) => subject.value === value);
     return subject ? subject.label : undefined;
   }
+
   const label = getLabelByValue(subject as string);
-
-  useEffect(() => {
-    const fetchMaterials = async () => {
-      try {
-        const data = await fetch(
-          `/api/fetchMaterialsBySubject_gcse?subject=${subject as string}`,
-        );
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        const material = await data.json();
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-        setMaterials(material);
-      } catch (error) {
-        console.error("Error fetching materials:", error);
-        toast({
-          title: "Error fetching materials",
-          description:
-            "An unknown error occurred while fetching materials. Please try again later.",
-          className: "bg-red-500",
-        });
-      }
-    };
-
-    fetchMaterials().catch((error) => {
-      console.error("Error fetching materials:", error);
-    });
-  }, [subject]);
 
   return (
     <main>
@@ -161,7 +127,7 @@ const SubjectPage = () => {
               </h3>
             </div>
           )}
-          {materials.map((material: Material) => (
+          {materials.map((material: materials) => (
             <div key={material.title} className="bg-white p-4 shadow">
               <Toggle
                 aria-label="Toggle favorite"
@@ -176,6 +142,12 @@ const SubjectPage = () => {
                       {},
                     ).catch((error) => {
                       console.error("Error adding favorite:", error);
+                      toast({
+                        title: "Error adding favourite",
+                        description:
+                          "An unknown error occurred while adding a favourite. Please try again later.",
+                        className: "bg-red-500",
+                      });
                     });
                   } else if (!pressed) {
                     fetch(
@@ -183,6 +155,12 @@ const SubjectPage = () => {
                       {},
                     ).catch((error) => {
                       console.error("Error removing favourite:", error);
+                      toast({
+                        title: "Error adding favourite",
+                        description:
+                          "An unknown error occurred while adding a favourite. Please try again later.",
+                        className: "bg-red-500",
+                      });
                     });
                   }
                 }}
@@ -205,15 +183,36 @@ const SubjectPage = () => {
               </Toggle>
               <h3 className="mb-2 text-lg font-semibold">{material.title}</h3>
               <p className="mb-2 text-gray-600">{material.description}</p>
-              <Link href={material.url} className="text-gray-600">
-                {material.url}
-              </Link>
+              {material.url ? (
+                <Link href={material.url} className="text-gray-600">
+                  {material.url}
+                </Link>
+              ) : (
+                <p>No URL provided</p>
+              )}
             </div>
           ))}
         </div>
       </div>
     </main>
   );
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const subject = context.params?.subject;
+
+  const materials: materials[] = await prisma.materials.findMany({
+    where: {
+      subject: subject as string,
+      level_of_study: "GCSE",
+    },
+  });
+
+  return {
+    props: {
+      materials,
+    },
+  };
 };
 
 export default SubjectPage;
